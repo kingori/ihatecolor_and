@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello World, MyActivity"
+            />
+    <!-- sign-in button -->
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <!-- sign-out button -->
+    <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            android:visibility="gone"/>
+
+    <Button
+            android:id="@+id/single_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="single player"
+            android:visibility="gone"
+            />
+
+    <Button
+            android:id="@+id/quick_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="quick game"
+            android:visibility="gone"
+            />
+    <Button
+            android:id="@+id/multi_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="multi player"
+            android:visibility="gone"
+            />
+    <Button
+            android:id="@+id/bt_leaderboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="leaderboard"
+            android:visibility="gone"
+            />
+    <Button
+            android:id="@+id/bt_achievement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="achievement"
+            android:visibility="gone"
+            />
+</LinearLayout>

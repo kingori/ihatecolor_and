@@ -1,0 +1,7 @@
+*.apk
+gen
+bin
+out
+local.properties
+*.iml
+

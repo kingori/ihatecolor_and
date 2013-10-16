@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">429299787355</string>
+    <string name="achievement_start">CgkI28yLor8MEAIQAg</string>
+    <string name="achievement_multi">CgkI28yLor8MEAIQAw</string>
+    <string name="achievement_score_10">CgkI28yLor8MEAIQBA</string>
+    <string name="achievement_score_20">CgkI28yLor8MEAIQBQ</string>
+    <string name="achievement_score_50">CgkI28yLor8MEAIQBg</string>
+    <string name="leaderboard_high_score">CgkI28yLor8MEAIQAQ</string>
+</resources>
