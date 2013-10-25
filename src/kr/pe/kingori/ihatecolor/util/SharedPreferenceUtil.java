@@ -1,8 +1,8 @@
-package kr.pe.kingori.peoplematcher.util;
+package kr.pe.kingori.ihatecolor.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import kr.pe.kingori.peoplematcher.Application;
+import kr.pe.kingori.ihatecolor.Application;
 
 import java.util.HashMap;
 

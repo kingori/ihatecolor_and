@@ -1,6 +1,7 @@
-package kr.pe.kingori.peoplematcher;
+package kr.pe.kingori.ihatecolor;
 
 import android.content.Context;
+import kr.pe.kingori.ihatecolor.util.FontManager;
 
 public class Application extends android.app.Application {
 
@@ -9,6 +10,7 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FontManager.init(this);
         context = this;
     }
 }

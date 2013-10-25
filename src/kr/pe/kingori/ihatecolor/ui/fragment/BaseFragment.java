@@ -1,11 +1,11 @@
-package kr.pe.kingori.peoplematcher.ui.fragment;
+package kr.pe.kingori.ihatecolor.ui.fragment;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import de.greenrobot.event.EventBus;
-import kr.pe.kingori.peoplematcher.ui.activity.MainActivity;
-import kr.pe.kingori.peoplematcher.ui.event.GameEvent;
-import kr.pe.kingori.peoplematcher.ui.event.PlayEvent;
+import kr.pe.kingori.ihatecolor.ui.activity.MainActivity;
+import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
+import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
 
 public abstract class BaseFragment extends Fragment {
 

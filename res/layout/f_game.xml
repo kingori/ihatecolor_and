@@ -15,12 +15,19 @@
                 android:layout_gravity="center_vertical|right"
                 />
 
-
         <TextView
-                android:id="@+id/tv_question"
+                android:id="@+id/tv_timer"
                 style="@style/view_mw"
+                android:layout_gravity="center_vertical|right"
+                />
+
+        <kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup
+                android:id="@+id/vg_question"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
 
         <TextView
                 android:id="@+id/tv_lives"
@@ -40,14 +47,20 @@
                     style="@style/answer_btn"/>
 
             <TextView
+                    android:id="@+id/bt_blue"
+                    android:text="blue"
+                    style="@style/answer_btn"/>
+
+            <TextView
                     android:id="@+id/bt_green"
                     android:text="green"
                     style="@style/answer_btn"/>
 
             <TextView
-                    android:id="@+id/bt_blue"
-                    android:text="blue"
+                    android:id="@+id/bt_yellow"
+                    android:text="yellow"
                     style="@style/answer_btn"/>
+
         </LinearLayout>
     </LinearLayout>
 

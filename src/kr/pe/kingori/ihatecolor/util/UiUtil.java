@@ -1,7 +1,7 @@
-package kr.pe.kingori.peoplematcher.util;
+package kr.pe.kingori.ihatecolor.util;
 
 import android.widget.Toast;
-import kr.pe.kingori.peoplematcher.Application;
+import kr.pe.kingori.ihatecolor.Application;
 
 public class UiUtil {
     private UiUtil() {

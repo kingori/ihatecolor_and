@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
 <resources>
-    <string name="app_id">429299787355</string>
-    <string name="achievement_start">CgkI28yLor8MEAIQAg</string>
-    <string name="achievement_multi">CgkI28yLor8MEAIQAw</string>
-    <string name="achievement_score_10">CgkI28yLor8MEAIQBA</string>
-    <string name="achievement_score_20">CgkI28yLor8MEAIQBQ</string>
-    <string name="achievement_score_50">CgkI28yLor8MEAIQBg</string>
-    <string name="leaderboard_high_score">CgkI28yLor8MEAIQAQ</string>
+    <string name="app_id">335645778409</string>
+    <string name="achievement_4_color_clear">CgkI6cOwsOIJEAIQBA</string>
+    <string name="achievement_6_color_clear">CgkI6cOwsOIJEAIQBQ</string>
+    <string name="achievement_4_color_perfect_clear">CgkI6cOwsOIJEAIQBg</string>
+    <string name="achievement_4_color_perfect_clear_10_times">CgkI6cOwsOIJEAIQCA</string>
+    <string name="achievement_4_color_perfect_clear_50_times">CgkI6cOwsOIJEAIQCg</string>
+    <string name="achievement_4_color_perfect_clear_100_times">CgkI6cOwsOIJEAIQCQ</string>
+    <string name="achievement_6_color_perfect_clear">CgkI6cOwsOIJEAIQBw</string>
+    <string name="achievement_6_color_perfect_clear_10_times">CgkI6cOwsOIJEAIQCw</string>
+    <string name="achievement_6_color_perfect_clear_50_times">CgkI6cOwsOIJEAIQDA</string>
+    <string name="achievement_6_color_perfect_clear_100_times">CgkI6cOwsOIJEAIQDQ</string>
+    <string name="achievement_4_color_100_heart_consumed">CgkI6cOwsOIJEAIQDg</string>
+    <string name="achievement_6_color_100_heart_consumed">CgkI6cOwsOIJEAIQFw</string>
+    <string name="achievement_4_color_clear__9.99_sec">CgkI6cOwsOIJEAIQDw</string>
+    <string name="achievement_4_color_clear__18.18_sec">CgkI6cOwsOIJEAIQEA</string>
+    <string name="achievement_4_color_clear__29.99_sec">CgkI6cOwsOIJEAIQEQ</string>
+    <string name="achievement_6_color_clear__9.99_sec">CgkI6cOwsOIJEAIQEg</string>
+    <string name="achievement_6_color_clear__18.18_sec">CgkI6cOwsOIJEAIQEw</string>
+    <string name="achievement_6_color_clear__29.99_sec">CgkI6cOwsOIJEAIQFA</string>
+    <string name="achievement_4_color_clear_under_5_sec">CgkI6cOwsOIJEAIQFQ</string>
+    <string name="achievement_6_color_clear_under_5_sec">CgkI6cOwsOIJEAIQFg</string>
+    <string name="leaderboard_4_colors">CgkI6cOwsOIJEAIQAA</string>
+    <string name="leaderboard_6_colors">CgkI6cOwsOIJEAIQAQ</string>
 </resources>

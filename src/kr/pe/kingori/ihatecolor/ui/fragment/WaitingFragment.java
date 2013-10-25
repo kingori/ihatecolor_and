@@ -1,10 +1,10 @@
-package kr.pe.kingori.peoplematcher.ui.fragment;
+package kr.pe.kingori.ihatecolor.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import kr.pe.kingori.peoplematcher.R;
+import kr.pe.kingori.ihatecolor.debug.R;
 
 public class WaitingFragment extends BaseFragment {
 

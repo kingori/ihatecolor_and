@@ -1,11 +1,11 @@
-package kr.pe.kingori.peoplematcher.ui.fragment;
+package kr.pe.kingori.ihatecolor.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import kr.pe.kingori.peoplematcher.R;
-import kr.pe.kingori.peoplematcher.ui.event.PlayEvent;
+import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
 
 public class MainFragment extends BaseFragment implements View.OnClickListener {
     View view;

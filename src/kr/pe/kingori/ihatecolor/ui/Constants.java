@@ -1,4 +1,4 @@
-package kr.pe.kingori.peoplematcher.ui;
+package kr.pe.kingori.ihatecolor.ui;
 
 public final class Constants {
     public static final String BDL_IS_MULTIPLAYER = "is_multiplayer";

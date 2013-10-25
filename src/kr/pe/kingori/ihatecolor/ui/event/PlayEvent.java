@@ -1,4 +1,4 @@
-package kr.pe.kingori.peoplematcher.ui.event;
+package kr.pe.kingori.ihatecolor.ui.event;
 
 public class PlayEvent {
     public final EventType eventType;

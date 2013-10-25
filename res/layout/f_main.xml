@@ -17,14 +17,14 @@
             android:layout_height="wrap_content"/>
 
     <!-- sign-out button -->
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/sign_out_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Out"
             android:visibility="gone"/>
 
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/single_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,28 +32,28 @@
             android:visibility="gone"
             />
 
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/quick_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="quick game"
             android:visibility="gone"
             />
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/multi_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="multi player"
             android:visibility="gone"
             />
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/bt_leaderboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="leaderboard"
             android:visibility="gone"
             />
-    <Button
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
             android:id="@+id/bt_achievement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

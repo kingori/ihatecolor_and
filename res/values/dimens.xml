@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="question_text_size">20sp</dimen>
+    <dimen name="question_padding">5dp</dimen>
+    <dimen name="question_height">30dp</dimen>
+</resources>

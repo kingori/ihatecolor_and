@@ -1,4 +1,4 @@
-package kr.pe.kingori.peoplematcher.ui.activity;
+package kr.pe.kingori.ihatecolor.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,12 +16,12 @@ import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.*;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import de.greenrobot.event.EventBus;
-import kr.pe.kingori.peoplematcher.R;
-import kr.pe.kingori.peoplematcher.ui.event.GameEvent;
-import kr.pe.kingori.peoplematcher.ui.event.PlayEvent;
-import kr.pe.kingori.peoplematcher.ui.fragment.GameFragment;
-import kr.pe.kingori.peoplematcher.ui.fragment.MainFragment;
-import kr.pe.kingori.peoplematcher.ui.fragment.WaitingFragment;
+import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
+import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
+import kr.pe.kingori.ihatecolor.ui.fragment.GameFragment;
+import kr.pe.kingori.ihatecolor.ui.fragment.MainFragment;
+import kr.pe.kingori.ihatecolor.ui.fragment.WaitingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -595,7 +595,7 @@ public class MainActivity extends BaseGameActivity implements
 
     public void updateLeaderboard(long score) {
         if (isSignedIn()) {
-            getGamesClient().submitScore(getString(R.string.leaderboard_high_score), score);
+//            getGamesClient().submitScore(getString(R.string.leaderboard_4_colors), score);
         } else {
             //TODO
         }

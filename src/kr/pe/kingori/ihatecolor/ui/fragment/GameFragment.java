@@ -1,4 +1,4 @@
-package kr.pe.kingori.peoplematcher.ui.fragment;
+package kr.pe.kingori.ihatecolor.ui.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,22 +8,27 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import kr.pe.kingori.peoplematcher.R;
-import kr.pe.kingori.peoplematcher.ui.Constants;
-import kr.pe.kingori.peoplematcher.ui.event.GameEvent;
-import kr.pe.kingori.peoplematcher.util.SharedPreferenceUtil;
-import kr.pe.kingori.peoplematcher.util.UiUtil;
+import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.ui.Constants;
+import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
+import kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup;
+import kr.pe.kingori.ihatecolor.util.SharedPreferenceUtil;
+import kr.pe.kingori.ihatecolor.util.UiUtil;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView tvScore;
-    private TextView tvQuestion;
+    private QuestionViewGroup vgQuestion;
     private TextView tvLives;
     private int score = 0;
     private boolean isMultiplayer = false;
@@ -33,6 +38,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private boolean paused;
 
     private int soundLifeDecrease;
+    private TextView tvTimer;
 
     public static GameFragment newInstance(boolean multiplayer) {
         GameFragment f = new GameFragment();
@@ -68,12 +74,14 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f_game, container, false);
         tvScore = (TextView) view.findViewById(R.id.tv_score);
-        tvQuestion = (TextView) view.findViewById(R.id.tv_question);
+        vgQuestion = (QuestionViewGroup) view.findViewById(R.id.vg_question);
         tvLives = (TextView) view.findViewById(R.id.tv_lives);
+        tvTimer = (TextView) view.findViewById(R.id.tv_timer);
 
         view.findViewById(R.id.bt_red).setOnClickListener(this);
         view.findViewById(R.id.bt_blue).setOnClickListener(this);
         view.findViewById(R.id.bt_green).setOnClickListener(this);
+        view.findViewById(R.id.bt_yellow).setOnClickListener(this);
 
         updateScore(0);
         return view;
@@ -84,7 +92,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         super.onResume();
 
         if (!gameStarted) {
-            prepareQuestion();
+            startGame();
         }
         startMusic();
     }
@@ -107,19 +115,84 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         bgmPlayer.start();
     }
 
-    private int[] answers = new int[]{2, 1, 0};
     private int curPosition = 0;
     private int curLives = 3;
 
     private boolean gameStarted = false;
 
-    private void prepareQuestion() {
+    public static enum Color {
+        RED(android.graphics.Color.parseColor("#ff0000")), BLUE(android.graphics.Color.parseColor("#0000ff")),
+        GREEN(android.graphics.Color.parseColor("#00ff00")), YELLOW(android.graphics.Color.parseColor("#ffff00")),
+        ORANGE(android.graphics.Color.parseColor("#ffa500")), PURPLE(android.graphics.Color.parseColor("#800080"));
+        public final int color;
+
+        Color(int color) {
+            this.color = color;
+        }
+    }
+
+    public static class Question {
+        public final Color text;
+        public final Color answer;
+
+        private Question(Color answer, Color text) {
+            this.answer = answer;
+            this.text = text;
+        }
+    }
+
+    private static final int MAX_QUESTIONS = 20;
+
+    private ArrayList<Question> questions;
+
+    private void startGame() {
         gameStarted = true;
-        tvQuestion.setText("green blue red");
+
+        questions = buildQuestion();
+
         curPosition = 0;
         curLives = 3;
+
+        vgQuestion.setQuestion(questions);
         updateLives();
         startMusic();
+        startTimer(30000);
+    }
+
+    private CountDownTimer timer;
+
+    private void startTimer(long totalTime) {
+        timer = new CountDownTimer(totalTime, 50) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText(
+                        String.format("%.2f", (float) millisUntilFinished / 1000));
+                tvTimer.setTag(millisUntilFinished);
+            }
+
+            @Override
+            public void onFinish() {
+                tvTimer.setText("0");
+                gameOver(false);
+            }
+        };
+        timer.start();
+    }
+
+    private ArrayList<Question> buildQuestion() {
+        ArrayList<Question> questions = new ArrayList<Question>();
+        int prevRand = -1;
+        int rand;
+        Random random = new Random();
+        Color[] colorVals = Color.values();
+        while (questions.size() < MAX_QUESTIONS) {
+            rand = random.nextInt(4);
+            if (rand != prevRand) {
+                questions.add(new Question(colorVals[rand], colorVals[random.nextInt(4)]));
+                prevRand = rand;
+            }
+        }
+        return questions;
     }
 
     @Override
@@ -161,7 +234,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         this.clearGame = clearGame;
         processFinalScore();
         showFinishView();
+        stopTimer();
         stopMusic();
+    }
+
+    private void stopTimer() {
+        timer.cancel();
     }
 
     private void stopMusic() {
@@ -218,9 +296,10 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         int prevHighScore = SharedPreferenceUtil.getInt(Constants.SF_HIGH_SCORE);
         if (score > prevHighScore) {
             UiUtil.showToast("new high score!!!");
-            unlock(score, prevHighScore, 50, R.string.achievement_score_50);
-            unlock(score, prevHighScore, 20, R.string.achievement_score_20);
-            unlock(score, prevHighScore, 10, R.string.achievement_score_10);
+            //TODO
+//            unlock(score, prevHighScore, 50, R.string.achievement_score_50);
+//            unlock(score, prevHighScore, 20, R.string.achievement_score_20);
+//            unlock(score, prevHighScore, 10, R.string.achievement_score_10);
 
             getBaseActivity().updateLeaderboard(score);
             SharedPreferenceUtil.put(Constants.SF_HIGH_SCORE, score);
@@ -236,17 +315,21 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int answer = 0;
+        Color answer = null;
 
         switch (v.getId()) {
             case R.id.bt_red:
-                answer = 0;
+                answer = Color.RED;
                 break;
             case R.id.bt_blue:
-                answer = 1;
+                answer = Color.BLUE;
                 break;
             case R.id.bt_green:
-                answer = 2;
+                answer = Color.GREEN;
+                break;
+            case R.id.bt_yellow:
+                answer = Color.YELLOW;
+                break;
         }
         if (isRightAnswer(answer)) {
             score += 1;
@@ -261,6 +344,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void progressToNextQuestion() {
+        vgQuestion.setSolved(curPosition);
         curPosition++;
 
         if (isGameFinished()) {
@@ -269,12 +353,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private boolean isGameFinished() {
-        return curPosition >= answers.length || curLives == 0;
+        return curPosition >= questions.size() || curLives == 0;
     }
 
 
-    private boolean isRightAnswer(int answer) {
-        return answers[curPosition] == answer;
+    private boolean isRightAnswer(Color answer) {
+        return questions.get(curPosition).answer == answer;
     }
 
     private int otherPlayerScore = -1;
@@ -300,8 +384,13 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     public void onPauseGame() {
         pauseMusic();
+        pauseTimer();
         showPauseDialog();
         paused = true;
+    }
+
+    private void pauseTimer() {
+        timer.cancel();
     }
 
     private Dialog pauseDialog;
@@ -334,7 +423,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private void onResumeGame() {
         startMusic();
+        resumeTimer();
         paused = false;
+    }
+
+    private void resumeTimer() {
+        startTimer((Long) tvTimer.getTag());
     }
 
     private void quitGame() {
