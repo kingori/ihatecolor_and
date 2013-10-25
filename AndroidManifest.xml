@@ -11,6 +11,7 @@
             android:label="@string/app_name"
             android:icon="@drawable/ic_launcher"
             android:name=".Application"
+            android:largeHeap="true"
             >
         <meta-data android:name="com.google.android.gms.games.APP_ID"
                    android:value="@string/app_id" />

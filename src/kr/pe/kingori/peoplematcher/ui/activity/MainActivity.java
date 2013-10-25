@@ -155,11 +155,12 @@ public class MainActivity extends BaseGameActivity implements
     }
 
     private Screen currentScreen;
+    private Fragment f;
 
     private void showScreen(Screen screen) {
         currentScreen = screen;
 
-        Fragment f = null;
+        f = null;
         switch (screen) {
             case MAIN:
                 f = new MainFragment();
@@ -600,4 +601,17 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (currentScreen == Screen.GAME) {
+            GameFragment gameF = (GameFragment) f;
+            if (gameF.isPaused()) {
+                finish();
+            } else {
+                ((GameFragment) f).onPauseGame();
+            }
+        } else {
+            finish();
+        }
+    }
 }

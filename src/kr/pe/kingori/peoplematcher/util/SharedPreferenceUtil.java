@@ -15,17 +15,17 @@ public class SharedPreferenceUtil {
 
     public static void put(String key, int value) {
         memoryCache.put(key, value);
-        getSharedPreference().edit().putInt(key, value);
+        getSharedPreference().edit().putInt(key, value).commit();
     }
 
     public static void put(String key, String value) {
         memoryCache.put(key, value);
-        getSharedPreference().edit().putString(key, value);
+        getSharedPreference().edit().putString(key, value).commit();
     }
 
     public static void put(String key, long value) {
         memoryCache.put(key, value);
-        getSharedPreference().edit().putLong(key, value);
+        getSharedPreference().edit().putLong(key, value).commit();
     }
 
     public static int getInt(String key) {

@@ -5,7 +5,7 @@ public class GameEvent {
     public final int eventVal;
 
     public static enum EventType {
-        OTHER_FINISHED
+        PAUSE_GAME, OTHER_FINISHED
     }
 
     private GameEvent(EventType eventType, int val) {
