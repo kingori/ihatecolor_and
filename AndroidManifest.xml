@@ -9,21 +9,27 @@
             android:targetSdkVersion="18"/>
     <application
             android:label="@string/app_name"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@drawable/appicon"
             android:name="kr.pe.kingori.ihatecolor.Application"
             android:largeHeap="true"
+            android:theme="@style/theme_ihatecolor"
             >
         <meta-data
                 android:name="com.google.android.gms.games.APP_ID"
                 android:value="@string/app_id"/>
+
         <activity
-                android:name="kr.pe.kingori.ihatecolor.ui.activity.MainActivity"
-                android:label="@string/app_name"
+                android:name="kr.pe.kingori.ihatecolor.ui.activity.SplashActivity"
+
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name="kr.pe.kingori.ihatecolor.ui.activity.MainActivity"
+                android:screenOrientation="portrait">
         </activity>
     </application>
 </manifest>

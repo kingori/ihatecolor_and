@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:text="I HATE\nCOLOR"
+        android:textSize="30sp"
+        android:lineSpacingMultiplier="1.2"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@color/main"
+        android:textStyle="bold"/>

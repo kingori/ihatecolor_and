@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/bg_base"
+            android:drawable="@drawable/bg_flash"/>
+    <item
+            android:left="@dimen/bg_padding"
+            android:bottom="@dimen/bg_padding"
+            android:right="@dimen/bg_padding"
+            android:top="@dimen/bg_padding"
+            android:drawable="@drawable/bg_bg"/>
+</layer-list>

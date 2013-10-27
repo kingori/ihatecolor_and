@@ -17,6 +17,7 @@ import com.google.android.gms.games.multiplayer.realtime.*;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import de.greenrobot.event.EventBus;
 import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.model.GameMode;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
 import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
 import kr.pe.kingori.ihatecolor.ui.fragment.GameFragment;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseGameActivity implements
     String mRoomId = null;
 
     // Are we playing in multiplayer mode?
-    boolean isMultiplayer = false;
+    GameMode gameMode;
 
     // The participants in the currently active game
     ArrayList<Participant> mParticipants = null;
@@ -91,16 +92,12 @@ public class MainActivity extends BaseGameActivity implements
         EventBus.getDefault().post(PlayEvent.newEvent(PlayEvent.EventType.LOG_OUT));
     }
 
-    public void onStartSingleGame() {
-        startSingleGame();
-    }
-
     public void onLogIn() {
         beginUserInitiatedSignIn();
     }
 
     public void onStartMultiGame() {
-        intent = getGamesClient().getSelectPlayersIntent(1, 3);
+        intent = getGamesClient().getSelectPlayersIntent(1, 1);
         showScreen(Screen.WAITING);
         startActivityForResult(intent, RC_SELECT_PLAYERS);
     }
@@ -110,20 +107,17 @@ public class MainActivity extends BaseGameActivity implements
     }
 
     public void onStartQuickGame() {
-        // automatch criteria to invite 1 random automatch opponent.
-        // You can also specify more opponents (up to 3).
-        Bundle am = RoomConfig.createAutoMatchCriteria(1, 1, 0);
-
-        // build the room config:
+        // quick-start a game with 1 randomly selected opponent
+        final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
+        Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(MIN_OPPONENTS,
+                MAX_OPPONENTS, 0);
         RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(this);
         rtmConfigBuilder.setMessageReceivedListener(this);
         rtmConfigBuilder.setRoomStatusUpdateListener(this);
-
-        rtmConfigBuilder.setAutoMatchCriteria(am);
-        RoomConfig roomConfig = rtmConfigBuilder.build();
-
-        // create room:
-        getGamesClient().createRoom(roomConfig);
+        rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
+        showScreen(Screen.WAITING);
+        keepScreenOn();
+        getGamesClient().createRoom(rtmConfigBuilder.build());
     }
 
     public void onShowAchievement() {
@@ -134,10 +128,10 @@ public class MainActivity extends BaseGameActivity implements
         startActivityForResult(getGamesClient().getAllLeaderboardsIntent(), RC_LEADERBOARD);
     }
 
-    public void broadcastScore(int score) {
-        if (isMultiplayer) {
+    public void broadcastFinish(boolean clear) {
+        if (GameMode.MULTI == gameMode) {
             mMsgBuf[0] = (byte) 'F';
-            mMsgBuf[1] = (byte) score;
+            mMsgBuf[1] = (byte) (clear ? 1 : 0);
             for (Participant p : mParticipants) {
                 if (p.getParticipantId().equals(mMyId))
                     continue;
@@ -148,6 +142,10 @@ public class MainActivity extends BaseGameActivity implements
                         p.getParticipantId());
             }
         }
+    }
+
+    public void onStartSingleGame(GameMode mode) {
+        startGame(mode);
     }
 
     private static enum Screen {
@@ -172,10 +170,9 @@ public class MainActivity extends BaseGameActivity implements
                 f = new WaitingFragment();
                 break;
             case GAME:
-                f = GameFragment.newInstance(isMultiplayer);
+                f = GameFragment.newInstance(gameMode);
                 break;
         }
-
 
         if (screen == Screen.ERROR) {
             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
@@ -183,9 +180,7 @@ public class MainActivity extends BaseGameActivity implements
 
         if (f != null) {
             getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.content, f, screen.name())
-                    .commitAllowingStateLoss();
+                    .beginTransaction().replace(R.id.content, f, screen.name()).commitAllowingStateLoss();
         }
         setInvitationViewVisibility();
     }
@@ -229,20 +224,6 @@ public class MainActivity extends BaseGameActivity implements
         super.onStart();
     }
 
-    void startQuickGame() {
-        // quick-start a game with 1 randomly selected opponent
-        final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
-        Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(MIN_OPPONENTS,
-                MAX_OPPONENTS, 0);
-        RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(this);
-        rtmConfigBuilder.setMessageReceivedListener(this);
-        rtmConfigBuilder.setRoomStatusUpdateListener(this);
-        rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
-        showScreen(Screen.WAITING);
-        keepScreenOn();
-        getGamesClient().createRoom(rtmConfigBuilder.build());
-    }
-
     @Override
     protected void onStop() {
         // if we're in a room, leave it.
@@ -273,10 +254,6 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
-    private void startSingleGame() {
-        startGame(false);
-    }
-
     @Override
     public void onInvitationReceived(Invitation invitation) {
         incomingInvitationId = invitation.getInvitationId();
@@ -287,7 +264,7 @@ public class MainActivity extends BaseGameActivity implements
     private void setInvitationViewVisibility() {
         boolean showInvitationPopup = false;
         if (incomingInvitationId != null) {
-            if (isMultiplayer) {
+            if (gameMode == GameMode.MULTI) {
                 showInvitationPopup = (currentScreen == Screen.MAIN);
             } else {
                 showInvitationPopup = (currentScreen == Screen.MAIN || currentScreen == Screen.GAME);
@@ -456,7 +433,7 @@ public class MainActivity extends BaseGameActivity implements
             Log.d(TAG, "Starting game because we got a start message.");
 
             dismissWaitingRoom();
-            startGame(true);
+            startGame(GameMode.MULTI);
         }
     }
 
@@ -492,7 +469,7 @@ public class MainActivity extends BaseGameActivity implements
                     broadcastStart();
 
                     // start the game!
-                    startGame(true);
+                    startGame(GameMode.MULTI);
                 } else if (responseCode == GamesActivityResultCodes.RESULT_LEFT_ROOM) {
                     // player actively indicated that they want to leave the room
                     leaveRoom();
@@ -509,8 +486,9 @@ public class MainActivity extends BaseGameActivity implements
     }
 
     private void broadcastStart() {
-        if (!isMultiplayer)
+        if (GameMode.MULTI != gameMode) {
             return; // playing single-player mode
+        }
 
         mMsgBuf[0] = 'S';
         mMsgBuf[1] = (byte) 0;
@@ -524,8 +502,8 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
-    private void startGame(boolean isMultiPlayGame) {
-        this.isMultiplayer = isMultiPlayGame;
+    private void startGame(GameMode mode) {
+        gameMode = mode;
         showScreen(Screen.GAME);
     }
 
@@ -605,13 +583,19 @@ public class MainActivity extends BaseGameActivity implements
     public void onBackPressed() {
         if (currentScreen == Screen.GAME) {
             GameFragment gameF = (GameFragment) f;
-            if (gameF.isPaused()) {
+            if (!gameF.isGameStarted()) {
+                showScreen(Screen.MAIN);
+            } else if (gameF.isGamePaused()) {
                 finish();
             } else {
-                ((GameFragment) f).onPauseGame();
+                ((GameFragment) f).onPauseGame(true);
             }
+        } else if (currentScreen == Screen.WAITING) {
+            showScreen(Screen.MAIN);
+            dismissWaitingRoom();
         } else {
             finish();
         }
+
     }
 }

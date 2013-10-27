@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="160dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            >
+
+        <TextView
+                android:id="@+id/bt_red"
+                android:text="RED"
+                style="@style/answer_btn.type1.small"/>
+
+        <TextView
+                android:id="@+id/bt_green"
+                android:text="GREEN"
+                style="@style/answer_btn.type2.small"/>
+
+        <TextView
+                android:id="@+id/bt_blue"
+                android:text="BLUE"
+                style="@style/answer_btn.type1.small"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            >
+
+        <TextView
+                android:id="@+id/bt_yellow"
+                android:text="YELLOW"
+                style="@style/answer_btn.type2.small"/>
+
+        <TextView
+                android:id="@+id/bt_orange"
+                android:text="ORANGE"
+                style="@style/answer_btn.type1.small"/>
+
+        <TextView
+                android:id="@+id/bt_black"
+                android:text="BLACK"
+                style="@style/answer_btn.type2.small"/>
+
+    </LinearLayout>
+
+</LinearLayout>

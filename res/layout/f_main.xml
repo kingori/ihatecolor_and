@@ -1,63 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/content"
+                android:orientation="vertical"
+        >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    <LinearLayout
+            android:id="@+id/vg_logo"
+            style="@style/view_ww"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
-            />
-    <!-- sign-in button -->
-    <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <include
+                layout="@layout/incl_logo"
+                />
+        <!-- sign-in button -->
+        <com.google.android.gms.common.SignInButton
+                android:id="@+id/bt_signin"
+                style="@style/view_ww"
+                android:layout_marginTop="10dp"
+                />
+    </LinearLayout>
 
-    <!-- sign-out button -->
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/sign_out_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            android:visibility="gone"/>
+    <LinearLayout
+            android:id="@+id/vg_game_btns"
+            style="@style/view_mm"
+            android:layout_below="@+id/vg_logo"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="60dp"
+            android:gravity="top|center_horizontal">
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_single"
+                style="@style/main_btn"
+                android:text="&gt; SINGLE &lt;"
+                android:textColor="@color/yellow"
+                />
+
+        <LinearLayout
+                android:id="@+id/vg_single_sub"
+                style="@style/view_ww"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                    android:id="@+id/bt_single_4"
+                    style="@style/view_ww"
+                    android:text="4COLOR"
+                    android:layout_marginRight="10dp"
+                    android:textSize="30sp"
+                    android:background="@null"
+                    android:textColor="@color/blue"/>
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                    android:id="@+id/bt_single_6"
+                    style="@style/view_ww"
+                    android:text="6COLOR"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="30sp"
+                    android:background="@null"
+                    android:textColor="@color/red"/>
+        </LinearLayout>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_quick"
+                style="@style/main_btn"
+                android:textColor="@color/green"
+                android:text="&gt; QUICK &lt;"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                />
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_multi"
+                style="@style/main_btn"
+                android:textColor="@color/red"
+                android:text="&gt; MULTI &lt;"
+                />
+
+        <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_achievement"
+                style="@style/main_btn.small"
+                android:text="ACHIEVEMENT"
+                android:layout_marginBottom="25dp"
+                />
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_leaderboard"
+                style="@style/main_btn.small"
+                android:text="LEADERBOARD"
+                />
+
+
+    </LinearLayout>
 
     <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/single_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="single player"
-            android:visibility="gone"
+            android:id="@+id/bt_sign_out"
+            style="@style/view_ww"
+            android:text="SIGN OUT"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:textSize="16sp"
+            android:textColor="@color/disable"
             />
 
     <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/quick_game"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="quick game"
-            android:visibility="gone"
+            android:id="@+id/bt_about_us"
+            style="@style/view_ww"
+            android:text="WE MAKE IT"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:textSize="16sp"
+            android:textColor="@color/disable"
             />
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/multi_player"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="multi player"
-            android:visibility="gone"
-            />
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/bt_leaderboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="leaderboard"
-            android:visibility="gone"
-            />
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/bt_achievement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="achievement"
-            android:visibility="gone"
-            />
-</LinearLayout>
+</RelativeLayout>

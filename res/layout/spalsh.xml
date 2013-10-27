@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/content">
+
+    <LinearLayout
+            style="@style/view_ww"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+        <include layout="@layout/incl_logo"/>
+
+        <TextView
+                style="@style/view_ww"
+                android:text="TOO MUCH COLOR\nWILL KILL YOU"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+    </LinearLayout>
+
+</RelativeLayout>

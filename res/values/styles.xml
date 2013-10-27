@@ -18,6 +18,42 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="answer_btn.type1">
+        <item name="android:background">@drawable/bg_btn_1</item>
+    </style>
+
+    <style name="answer_btn.type2">
+        <item name="android:background">@drawable/bg_btn_2</item>
+    </style>
+
+    <style name="answer_btn.type1.small">
+        <item name="android:background">@drawable/bg_btn_1</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="answer_btn.type2.small">
+        <item name="android:background">@drawable/bg_btn_2</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+
+    <style name="main_btn" parent="@style/view_ww">
+        <item name="android:background">@null</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="main_btn.small">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="content" parent="@style/view_mm">
+        <item name="android:background">@drawable/bg_common</item>
+        <item name="android:padding">@dimen/content_padding</item>
     </style>
 </resources>

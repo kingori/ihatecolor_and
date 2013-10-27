@@ -14,6 +14,7 @@ public class CustomFontTextView extends TextView {
     public CustomFontTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         applyTypeFace();
+
     }
 
     public CustomFontTextView(Context context, AttributeSet attrs, int defStyle) {
@@ -22,6 +23,6 @@ public class CustomFontTextView extends TextView {
     }
 
     private void applyTypeFace() {
-        FontManager.applyFont(this);
+        FontManager.applyTypeface(this);
     }
 }

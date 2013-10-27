@@ -2,6 +2,7 @@ package kr.pe.kingori.ihatecolor.util;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.text.TextPaint;
 import android.widget.TextView;
 
 public class FontManager {
@@ -14,8 +15,13 @@ public class FontManager {
         customTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/intro.otf");
     }
 
-    public static TextView applyFont(TextView view) {
-        view.setTypeface(customTypeFace);
+    public static TextView applyTypeface(TextView view) {
+        view.setTypeface(customTypeFace, Typeface.BOLD);
         return view;
+    }
+
+    public static TextPaint applyTypeface(TextPaint tp) {
+        tp.setTypeface(customTypeFace);
+        return tp;
     }
 }

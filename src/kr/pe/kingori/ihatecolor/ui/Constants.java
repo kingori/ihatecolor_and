@@ -1,7 +1,7 @@
 package kr.pe.kingori.ihatecolor.ui;
 
 public final class Constants {
-    public static final String BDL_IS_MULTIPLAYER = "is_multiplayer";
+    public static final String BDL_GAMEMODE = "is_multiplayer";
 
     private Constants() {
     }

@@ -1,67 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/view_mm">
+        style="@style/content"
+        android:background="@drawable/bg_game"
+        android:padding="0dp">
 
-    <LinearLayout
+    <RelativeLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            style="@style/view_mm"
+            android:padding="@dimen/bg_padding"
+            >
 
-        <TextView
-                android:id="@+id/tv_score"
-                style="@style/view_mw"
-                android:layout_gravity="center_vertical|right"
-                />
-
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/tv_timer"
-                style="@style/view_mw"
+                style="@style/view_ww"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
                 android:layout_gravity="center_vertical|right"
-                />
-
-        <kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup
-                android:id="@+id/vg_question"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
-
-        <TextView
-                android:id="@+id/tv_lives"
-                style="@style/view_mw"
-                android:layout_gravity="center_vertical|right"
+                android:textColor="@color/main"
+                android:textSize="30sp"
                 />
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
+                android:id="@+id/vg_lives"
+                style="@style/view_ww"
+                android:layout_gravity="center_vertical|right"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 >
 
-            <TextView
-                    android:id="@+id/bt_red"
-                    android:text="red"
-                    style="@style/answer_btn"/>
+            <ImageView
+                    style="@style/view_ww"
+                    android:src="@drawable/appicon"/>
 
-            <TextView
-                    android:id="@+id/bt_blue"
-                    android:text="blue"
-                    style="@style/answer_btn"/>
+            <ImageView
+                    style="@style/view_ww"
+                    android:src="@drawable/appicon"/>
 
-            <TextView
-                    android:id="@+id/bt_green"
-                    android:text="green"
-                    style="@style/answer_btn"/>
-
-            <TextView
-                    android:id="@+id/bt_yellow"
-                    android:text="yellow"
-                    style="@style/answer_btn"/>
-
+            <ImageView
+                    style="@style/view_ww"
+                    android:src="@drawable/appicon"/>
         </LinearLayout>
-    </LinearLayout>
 
+        <RelativeLayout
+                style="@style/view_mm"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="160dp"
+
+                >
+
+            <LinearLayout
+                    android:id="@+id/vg_other"
+                    style="@style/view_ww">
+
+                <ImageView
+                        android:id="@+id/iv_other"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        />
+
+                <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                        android:id="@+id/tv_other"
+                        style="@style/view_ww"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        />
+            </LinearLayout>
+
+            <kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup
+                    android:id="@+id/vg_question"
+                    style="@style/view_mm"
+                    android:layout_below="@+id/vg_other"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"/>
+
+        </RelativeLayout>
+
+        <ViewStub
+                android:id="@+id/vs_btn_4"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout="@layout/incl_btn_4"
+                android:layout_alignParentBottom="true"
+                />
+
+        <ViewStub
+                android:id="@+id/vs_btn_6"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout="@layout/incl_btn_6"
+                android:layout_alignParentBottom="true"
+                />
+
+    </RelativeLayout>
+
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+            android:id="@+id/tv_countdown"
+            style="@style/view_mm"
+            android:background="@android:color/black"
+            android:gravity="center"
+            android:textSize="80sp"
+            android:visibility="gone"
+            />
 </RelativeLayout>
