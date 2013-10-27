@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.google.android.gms.games.GamesActivityResultCodes;
@@ -18,6 +17,8 @@ import com.google.example.games.basegameutils.BaseGameActivity;
 import de.greenrobot.event.EventBus;
 import kr.pe.kingori.ihatecolor.debug.R;
 import kr.pe.kingori.ihatecolor.model.GameMode;
+import kr.pe.kingori.ihatecolor.ui.CustomDialogFragment;
+import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
 import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
 import kr.pe.kingori.ihatecolor.ui.fragment.GameFragment;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseGameActivity implements
-        View.OnClickListener, OnInvitationReceivedListener, RoomUpdateListener, RoomStatusUpdateListener, RealTimeMessageReceivedListener {
+        OnInvitationReceivedListener, RoomUpdateListener, RoomStatusUpdateListener, RealTimeMessageReceivedListener {
 
     // tag for debug logging
     final boolean ENABLE_DEBUG = true;
@@ -63,7 +64,6 @@ public class MainActivity extends BaseGameActivity implements
     byte[] mMsgBuf = new byte[2];
 
     private boolean mWaitRoomDismissedFromCode = false;
-    private View vwInvitation;
 
     /**
      * Called when the activity is first created.
@@ -75,12 +75,17 @@ public class MainActivity extends BaseGameActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        vwInvitation = findViewById(R.id.vw_inviation);
-        vwInvitation.setOnClickListener(this);
-
         if (savedInstanceState == null) {
             showScreen(Screen.MAIN);
         }
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public boolean isUserSignedIn() {
@@ -146,6 +151,67 @@ public class MainActivity extends BaseGameActivity implements
 
     public void onStartSingleGame(GameMode mode) {
         startGame(mode);
+    }
+
+    private boolean isNearTargetTime(long elpasedTime, long targetTime) {
+        long timeDiff = targetTime - elpasedTime;
+        return timeDiff >= 0 && timeDiff < 10;
+    }
+
+    public void submitResultToPlay(boolean gameCleared, long elapsedTime, int curLives, GameMode gameMode) {
+        switch (gameMode) {
+            case SINGLE_4:
+                if (gameCleared) {
+                    unlockAchievement(R.string.achievement_4_color_clear);
+                    if (curLives == GameFragment.MAX_LIFE) {
+                        unlockAchievement(R.string.achievement_4_color_perfect_clear);
+                        incrementAcheivement(R.string.achievement_4_color_perfect_clear_10_times, 1);
+                        incrementAcheivement(R.string.achievement_4_color_perfect_clear_50_times, 1);
+                        incrementAcheivement(R.string.achievement_4_color_perfect_clear_100_times, 1);
+                    }
+
+                    if (isNearTargetTime(elapsedTime, 9999)) {
+                        unlockAchievement(R.string.achievement_4_color_clear__9_99_sec);
+                    } else if (isNearTargetTime(elapsedTime, 18189)) {
+                        unlockAchievement(R.string.achievement_4_color_clear__18_18_sec);
+                    } else if (isNearTargetTime(elapsedTime, 29999)) {
+                        unlockAchievement(R.string.achievement_4_color_clear__29_99_sec);
+                    }
+                    if (elapsedTime <= 5000) {
+                        unlockAchievement(R.string.achievement_4_color_clear_under_5_sec);
+                    }
+                }
+                incrementAcheivement(R.string.achievement_4_color_100_heart_consumed, GameFragment.MAX_LIFE - curLives);
+                break;
+            case SINGLE_6:
+                if (gameCleared) {
+                    unlockAchievement(R.string.achievement_6_color_clear);
+                    if (curLives == GameFragment.MAX_LIFE) {
+                        unlockAchievement(R.string.achievement_6_color_perfect_clear);
+                        incrementAcheivement(R.string.achievement_6_color_perfect_clear_10_times, 1);
+                        incrementAcheivement(R.string.achievement_6_color_perfect_clear_50_times, 1);
+                        incrementAcheivement(R.string.achievement_6_color_perfect_clear_100_times, 1);
+                    }
+                    if (isNearTargetTime(elapsedTime, 9999)) {
+                        unlockAchievement(R.string.achievement_6_color_clear__9_99_sec);
+                    } else if (isNearTargetTime(elapsedTime, 18189)) {
+                        unlockAchievement(R.string.achievement_6_color_clear__18_18_sec);
+                    } else if (isNearTargetTime(elapsedTime, 29999)) {
+                        unlockAchievement(R.string.achievement_6_color_clear__29_99_sec);
+                    }
+                    if (elapsedTime <= 5000) {
+                        unlockAchievement(R.string.achievement_6_color_clear_under_5_sec);
+                    }
+                }
+                incrementAcheivement(R.string.achievement_6_color_100_heart_consumed, GameFragment.MAX_LIFE - curLives);
+                break;
+            case MULTI:
+                break;
+        }
+
+        if (gameCleared) {
+            updateLeaderboard(gameMode, elapsedTime);
+        }
     }
 
     private static enum Screen {
@@ -244,13 +310,16 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.vw_inviation:
-                acceptInviteToRoom(incomingInvitationId);
-                incomingInvitationId = null;
-                break;
+    public void onEventMainThread(DialogEvent e) {
+        if (e.dialogType == DialogEvent.DialogType.INVITATION) {
+            switch (e.buttonType) {
+                case OK:
+                    incomingInvitationId = null;
+                    acceptInviteToRoom(incomingInvitationId);
+                    break;
+                case CANCEL:
+                    break;
+            }
         }
     }
 
@@ -271,7 +340,15 @@ public class MainActivity extends BaseGameActivity implements
             }
         }
 
-        vwInvitation.setVisibility(showInvitationPopup ? View.VISIBLE : View.GONE);
+        if (showInvitationPopup) {
+            showDialog(1);
+        }
+
+        if (showInvitationPopup) {
+            CustomDialogFragment
+                    .newInstance(DialogEvent.DialogType.INVITATION, true, " INVITED YOU. WILL YOU ACCEPT THIS INVITATION?", "ACCEPT", "DENY")
+                    .show(getSupportFragmentManager(), "dialog");
+        }
     }
 
     @Override
@@ -563,17 +640,23 @@ public class MainActivity extends BaseGameActivity implements
         Log.d(TAG, "Room created, waiting for it to be ready...");
     }
 
-    public void unlockArchivement(String id) {
+    public void unlockAchievement(int resId) {
         if (isSignedIn()) {
-            getGamesClient().unlockAchievement(id);
+            getGamesClient().unlockAchievement(getString(resId));
         } else {
             //TODO
         }
     }
 
-    public void updateLeaderboard(long score) {
+    public void incrementAcheivement(int resId, int incVal) {
+        if (incVal > 0 && isSignedIn()) {
+            getGamesClient().incrementAchievement(getString(resId), incVal);
+        }
+    }
+
+    public void updateLeaderboard(GameMode mode, long elapsedTime) {
         if (isSignedIn()) {
-//            getGamesClient().submitScore(getString(R.string.leaderboard_4_colors), score);
+            getGamesClient().submitScore(getString(mode == GameMode.SINGLE_4 ? R.string.leaderboard_4_colors : R.string.leaderboard_6_colors), elapsedTime);
         } else {
             //TODO
         }

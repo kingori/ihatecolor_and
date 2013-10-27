@@ -25,6 +25,8 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_6_color_clear__29.99_sec">CgkI6cOwsOIJEAIQFA</string>
     <string name="achievement_4_color_clear_under_5_sec">CgkI6cOwsOIJEAIQFQ</string>
     <string name="achievement_6_color_clear_under_5_sec">CgkI6cOwsOIJEAIQFg</string>
-    <string name="leaderboard_4_colors">CgkI6cOwsOIJEAIQAA</string>
-    <string name="leaderboard_6_colors">CgkI6cOwsOIJEAIQAQ</string>
+    <string name="leaderboard_4_colors_old">CgkI6cOwsOIJEAIQAA</string>
+    <string name="leaderboard_6_colors_old">CgkI6cOwsOIJEAIQAQ</string>
+    <string name="leaderboard_4_colors">CgkI6cOwsOIJEAIQGg</string>
+    <string name="leaderboard_6_colors">CgkI6cOwsOIJEAIQGw</string>
 </resources>

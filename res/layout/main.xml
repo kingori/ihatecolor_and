@@ -4,19 +4,5 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/content">
-
-
-    <TextView
-            android:id="@+id/vw_inviation"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="invitation received!"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            />
 </RelativeLayout>
 

@@ -16,11 +16,10 @@ import kr.pe.kingori.ihatecolor.debug.R;
 import kr.pe.kingori.ihatecolor.model.Color;
 import kr.pe.kingori.ihatecolor.model.GameMode;
 import kr.pe.kingori.ihatecolor.ui.Constants;
-import kr.pe.kingori.ihatecolor.ui.CustomDialog;
+import kr.pe.kingori.ihatecolor.ui.CustomDialogFragment;
+import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
 import kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup;
-import kr.pe.kingori.ihatecolor.util.SharedPreferenceUtil;
-import kr.pe.kingori.ihatecolor.util.UiUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,7 +30,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private QuestionViewGroup vgQuestion;
     private ViewGroup vgLives;
     private GameMode gameMode;
-    private boolean clearGame;
+    private boolean gameCleared;
     private SoundPool sfxPlayer;
     private MediaPlayer bgmPlayer;
     private AnimationDrawable baseBg;
@@ -41,6 +40,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private int soundLifeDecrease;
 
     private static final int MAX_QUESTIONS = 20;
+    public static final int MAX_LIFE = 3;
     private static final long GAME_TIME = 30000L;
 
     private Runnable countdownR;
@@ -51,6 +51,11 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private int bgmPausePosition = -1;
 
     private int countDownCount = 3;
+
+    private int curPosition = 0;
+    private int curLives = MAX_LIFE;
+
+    private boolean resumeMusicOnActivityCreate = false;
 
     public boolean isGamePaused() {
         return state == GameState.PAUSE;
@@ -179,10 +184,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         }
 
         tvCountdown.postDelayed(countdownR, 500L);
-
     }
 
-    private boolean resumeMusicOnActivityCreate = false;
 
     private void startMusic() {
         if (getActivity() == null) {
@@ -200,8 +203,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         bgmPlayer.start();
     }
 
-    private int curPosition = 0;
-    private int curLives = 3;
 
     public boolean isGameStarted() {
         return state != GameState.COUNTDOWN;
@@ -288,9 +289,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         super.onPause();
         onPauseGame(false);
         releasePlayer();
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
     }
 
     private void releasePlayer() {
@@ -320,7 +318,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void gameOver(boolean clearGame) {
-        this.clearGame = clearGame;
+        this.gameCleared = clearGame;
         state = GameState.FINISH;
 
         processFinalScore();
@@ -357,13 +355,15 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    private CustomDialog dialog;
-
     private void showFinishDialog() {
+        if (getFragmentManager().findFragmentByTag("diag") != null) {
+            return;
+        }
+
         String msg = "";
         long elapsedTimeInMillis = getElapsedTimeInMillis();
 
-        if (clearGame) {
+        if (gameCleared) {
             if (gameMode == GameMode.MULTI) {
                 msg = "YOU WIN!\nCLEAR TIME: " + elapsedTimeInMillis;
             } else {
@@ -373,43 +373,31 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             msg = "ARRGH...\nFAILED!";
         }
 
-        dialog = new CustomDialog(getActivity(), false, new CustomDialog.OnClickListener() {
-            @Override
-            public void onDecline() {
-            }
+        CustomDialogFragment.newInstance(DialogEvent.DialogType.GAMEOVER, false, msg, "OK", null).show(getFragmentManager(), "diag");
+    }
 
-            @Override
-            public void onAccept() {
+    protected void onEventMainThread(DialogEvent e) {
+        if (e.dialogType == DialogEvent.DialogType.GAMEOVER) {
+            if (e.buttonType == DialogEvent.ButtonType.OK) {
                 getBaseActivity().onFinishGame();
             }
-        }, msg, "OK", null);
-
-        dialog.show();
+        } else if (e.dialogType == DialogEvent.DialogType.PAUSE) {
+            switch (e.buttonType) {
+                case OK:
+                    onResumeGame();
+                    break;
+                case CANCEL:
+                    quitGame();
+                    break;
+            }
+        }
     }
 
     private void processFinalScore() {
-        getBaseActivity().broadcastFinish(clearGame);
-        if (clearGame) {
-            long elapsedTime = getElapsedTimeInMillis();
-            long prevElapsedTime = SharedPreferenceUtil.getLong(Constants.SF_HIGH_SCORE);
-            if (elapsedTime < prevElapsedTime) {
-                UiUtil.showToast("new high score!!!");
-                //TODO
-//            unlock(score, prevHighScore, 50, R.string.achievement_score_50);
-//            unlock(score, prevHighScore, 20, R.string.achievement_score_20);
-//            unlock(score, prevHighScore, 10, R.string.achievement_score_10);
-
-//                getBaseActivity().updateLeaderboard(score);
-                SharedPreferenceUtil.put(Constants.SF_HIGH_SCORE, elapsedTime);
-            }
-        }
+        getBaseActivity().broadcastFinish(gameCleared);
+        getBaseActivity().submitResultToPlay(gameCleared, getElapsedTimeInMillis(), curLives, gameMode);
     }
 
-    private void unlock(int score, int prevHighScore, int baseScore, int achievementId) {
-        if (score >= baseScore && prevHighScore < baseScore) {
-            getBaseActivity().unlockArchivement(getString(achievementId));
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -507,17 +495,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void showPauseDialog() {
-        new CustomDialog(getActivity(), true, new CustomDialog.OnClickListener() {
-            @Override
-            public void onDecline() {
-                quitGame();
-            }
-
-            @Override
-            public void onAccept() {
-                onResumeGame();
-            }
-        }, "PAUSED", "CONTINUE", "QUIT").show();
+        if (getFragmentManager().findFragmentByTag("diag") == null) {
+            CustomDialogFragment.newInstance(DialogEvent.DialogType.PAUSE, true, "PAUSED", "RESUME", "QUIT").show(getFragmentManager(), "diag");
+        }
     }
 
     private void onResumeGame() {
