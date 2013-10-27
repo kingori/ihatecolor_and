@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.model.Color;
 import kr.pe.kingori.ihatecolor.util.FontManager;
 

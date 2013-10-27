@@ -18,3 +18,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+-keep class kr.pe.kingori.ihatecolor.ui.event.** { *; }

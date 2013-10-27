@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.model.GameMode;
 import kr.pe.kingori.ihatecolor.ui.event.PlayEvent;
 
@@ -110,7 +110,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
-    protected void onEventMainThread(PlayEvent e) {
+    public void onEventMainThread(PlayEvent e) {
         super.onEventMainThread(e);
         if (e.eventType == PlayEvent.EventType.LOG_IN) {
             showButtons();

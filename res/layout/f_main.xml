@@ -126,5 +126,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:textColor="@color/orange"
+            android:visibility="gone"
             />
 </RelativeLayout>

@@ -1,6 +1,6 @@
 package kr.pe.kingori.ihatecolor.model;
 
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 
 public enum Color {
     RED(R.color.red), BLUE(R.color.blue),

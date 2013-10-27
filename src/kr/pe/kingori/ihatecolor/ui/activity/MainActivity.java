@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.*;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import de.greenrobot.event.EventBus;
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.model.GameMode;
 import kr.pe.kingori.ihatecolor.ui.CustomDialogFragment;
 import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
@@ -65,6 +66,9 @@ public class MainActivity extends BaseGameActivity implements
 
     private boolean mWaitRoomDismissedFromCode = false;
 
+    private Screen currentScreen;
+    private Fragment f;
+
     /**
      * Called when the activity is first created.
      */
@@ -73,9 +77,10 @@ public class MainActivity extends BaseGameActivity implements
         enableDebugLog(ENABLE_DEBUG, TAG);
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && getInvitationId() == null) {
             showScreen(Screen.MAIN);
         }
 
@@ -218,12 +223,10 @@ public class MainActivity extends BaseGameActivity implements
         MAIN, WAITING, ERROR, GAME
     }
 
-    private Screen currentScreen;
-    private Fragment f;
-
     private void showScreen(Screen screen) {
         currentScreen = screen;
 
+        Fragment prevFragment = f;
         f = null;
         switch (screen) {
             case MAIN:
@@ -241,12 +244,15 @@ public class MainActivity extends BaseGameActivity implements
         }
 
         if (screen == Screen.ERROR) {
-            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "UNKNOWN ERROR", Toast.LENGTH_SHORT).show();
         }
 
         if (f != null) {
-            getSupportFragmentManager()
-                    .beginTransaction().replace(R.id.content, f, screen.name()).commitAllowingStateLoss();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if (prevFragment != null) {
+                ft.remove(prevFragment);
+            }
+            ft.replace(R.id.fragment_content, f, "screen").commitAllowingStateLoss();
         }
         setInvitationViewVisibility();
     }
@@ -314,8 +320,8 @@ public class MainActivity extends BaseGameActivity implements
         if (e.dialogType == DialogEvent.DialogType.INVITATION) {
             switch (e.buttonType) {
                 case OK:
-                    incomingInvitationId = null;
                     acceptInviteToRoom(incomingInvitationId);
+                    incomingInvitationId = null;
                     break;
                 case CANCEL:
                     break;
@@ -323,10 +329,12 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
+    private Participant inviter;
+
     @Override
     public void onInvitationReceived(Invitation invitation) {
         incomingInvitationId = invitation.getInvitationId();
-        Toast.makeText(this, "you're invited by " + invitation.getInviter().getDisplayName(), Toast.LENGTH_SHORT).show();
+        inviter = invitation.getInviter();
         setInvitationViewVisibility();
     }
 
@@ -339,14 +347,9 @@ public class MainActivity extends BaseGameActivity implements
                 showInvitationPopup = (currentScreen == Screen.MAIN || currentScreen == Screen.GAME);
             }
         }
-
-        if (showInvitationPopup) {
-            showDialog(1);
-        }
-
         if (showInvitationPopup) {
             CustomDialogFragment
-                    .newInstance(DialogEvent.DialogType.INVITATION, true, " INVITED YOU. WILL YOU ACCEPT THIS INVITATION?", "ACCEPT", "DENY")
+                    .newInstance(DialogEvent.DialogType.INVITATION, true, "YOU'RE INVITED BY " + inviter.getDisplayName() + ".\nWILL YOU ACCEPT THIS INVITATION?", "ACCEPT", "DENY")
                     .show(getSupportFragmentManager(), "dialog");
         }
     }
@@ -483,7 +486,14 @@ public class MainActivity extends BaseGameActivity implements
 
     private void updateRoom(Room room) {
         mParticipants = room.getParticipants();
-//        updatePeerScoresDisplay();
+    }
+
+    public Participant getPeerInfo() {
+        if (mParticipants != null) {
+            return mParticipants.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -502,8 +512,8 @@ public class MainActivity extends BaseGameActivity implements
         String sender = rtm.getSenderParticipantId();
         if (buf[0] == 'F' || buf[0] == 'U') {
             // score update.
-            int thisScore = (int) buf[1];
-            EventBus.getDefault().post(GameEvent.newEvent(GameEvent.EventType.OTHER_FINISHED, thisScore));
+            boolean otherCleared = ((int) buf[1]) == 1;
+            EventBus.getDefault().post(GameEvent.newEvent(GameEvent.EventType.OTHER_FINISHED, otherCleared));
         } else if (buf[0] == 'S') {
             // someone else started to play -- so dismiss the waiting room and
             // get right to it!

@@ -5,4 +5,5 @@ out
 local.properties
 *.iml
 *.swp
+proguard_logs
 

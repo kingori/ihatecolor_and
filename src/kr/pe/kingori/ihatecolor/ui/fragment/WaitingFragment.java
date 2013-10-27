@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 
 public class WaitingFragment extends BaseFragment {
 

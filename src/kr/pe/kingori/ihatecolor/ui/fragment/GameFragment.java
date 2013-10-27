@@ -1,18 +1,24 @@
 package kr.pe.kingori.ihatecolor.ui.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageView;
 import android.widget.TextView;
-import kr.pe.kingori.ihatecolor.debug.R;
+import com.google.android.gms.games.multiplayer.Participant;
+import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.model.Color;
 import kr.pe.kingori.ihatecolor.model.GameMode;
 import kr.pe.kingori.ihatecolor.ui.Constants;
@@ -21,6 +27,11 @@ import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
 import kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -92,12 +103,27 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private void initMusicPlayer() {
         sfxPlayer = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         soundLifeDecrease = sfxPlayer.load(getActivity(), R.raw.button_33, 1);
-        bgmPlayer = MediaPlayer.create(getActivity(), R.raw.autmn_road);
+        int soundResId = 0;
+        {
+            int soundRnd = new Random().nextInt(3);
+            switch (soundRnd) {
+                case 2:
+                    soundResId = R.raw.fall_road;
+                    break;
+                case 1:
+                    soundResId = R.raw.umbrella;
+                    break;
+                case 0:
+                    soundResId = R.raw.four_seasons;
+                    break;
+            }
+        }
+        bgmPlayer = MediaPlayer.create(getActivity(), soundResId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.f_game, container, false);
+        final View view = inflater.inflate(R.layout.f_game, container, false);
         vgQuestion = (QuestionViewGroup) view.findViewById(R.id.vg_question);
         vgLives = (ViewGroup) view.findViewById(R.id.vg_lives);
         tvTimer = (TextView) view.findViewById(R.id.tv_timer);
@@ -109,6 +135,13 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             ((ViewStub) view.findViewById(R.id.vs_btn_6)).inflate();
             view.findViewById(R.id.bt_black).setOnClickListener(this);
             view.findViewById(R.id.bt_orange).setOnClickListener(this);
+            if (gameMode == GameMode.MULTI) {
+                Participant participant = getBaseActivity().getPeerInfo();
+                if (participant != null) {
+                    ((TextView) view.findViewById(R.id.tv_other)).setText("VS\n" + participant.getDisplayName());
+                    loadUserImage(view, participant);
+                }
+            }
         }
         view.findViewById(R.id.bt_red).setOnClickListener(this);
         view.findViewById(R.id.bt_blue).setOnClickListener(this);
@@ -123,6 +156,43 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         }
 
         return view;
+    }
+
+    private void loadUserImage(final View view, Participant participant) {
+        if (participant.getIconImageUri() != null) {
+            new AsyncTask<Uri, Void, Bitmap>() {
+                @Override
+                protected Bitmap doInBackground(Uri... params) {
+                    HttpURLConnection conn = null;
+                    InputStream is = null;
+                    try {
+                        conn = (HttpURLConnection) new URL(params[0].toString()).openConnection();
+                        is = new BufferedInputStream(conn.getInputStream());
+                        return BitmapFactory.decodeStream(is);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return null;
+                    } finally {
+                        if (is != null) {
+                            try {
+                                is.close();
+                            } catch (IOException e) {
+                            }
+                        }
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    if (bitmap != null) {
+                        ((ImageView) view.findViewById(R.id.iv_other)).setImageBitmap(bitmap);
+                    }
+                }
+            }.execute(participant.getIconImageUri());
+        }
     }
 
     @Override
@@ -365,9 +435,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
         if (gameCleared) {
             if (gameMode == GameMode.MULTI) {
-                msg = "YOU WIN!\nCLEAR TIME: " + elapsedTimeInMillis;
+                msg = "YOU WIN!\nCLEAR TIME: " + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
             } else {
-                msg = "CLEAR!\nCLEAR TIME: " + elapsedTimeInMillis;
+                msg = "CLEAR!\nCLEAR TIME: " + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
             }
         } else {
             msg = "ARRGH...\nFAILED!";
@@ -376,7 +446,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         CustomDialogFragment.newInstance(DialogEvent.DialogType.GAMEOVER, false, msg, "OK", null).show(getFragmentManager(), "diag");
     }
 
-    protected void onEventMainThread(DialogEvent e) {
+    public void onEventMainThread(DialogEvent e) {
         if (e.dialogType == DialogEvent.DialogType.GAMEOVER) {
             if (e.buttonType == DialogEvent.ButtonType.OK) {
                 getBaseActivity().onFinishGame();
@@ -460,7 +530,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private OtherPlayerStatus otherPlayerStatus = OtherPlayerStatus.UNKOWN;
 
     @Override
-    protected void onEventMainThread(GameEvent e) {
+    public void onEventMainThread(GameEvent e) {
         switch (e.eventType) {
             case OTHER_FINISHED: {
                 otherPlayerStatus = ((Boolean) e.eventVal) ? OtherPlayerStatus.CLEAR : OtherPlayerStatus.DEAD;

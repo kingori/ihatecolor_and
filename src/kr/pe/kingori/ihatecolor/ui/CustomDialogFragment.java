@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import de.greenrobot.event.EventBus;
-import kr.pe.kingori.ihatecolor.debug.R;
+import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 
 public class CustomDialogFragment

@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               style="@style/view_mm"
+              android:background="@android:color/black"
               android:gravity="center">
 
     <LinearLayout

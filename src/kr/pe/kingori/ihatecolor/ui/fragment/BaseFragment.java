@@ -13,11 +13,11 @@ public abstract class BaseFragment extends Fragment {
         return (MainActivity) getActivity();
     }
 
-    protected void onEventMainThread(PlayEvent e) {
+    public void onEventMainThread(PlayEvent e) {
 
     }
 
-    protected void onEventMainThread(GameEvent e) {
+    public void onEventMainThread(GameEvent e) {
 
     }
 
