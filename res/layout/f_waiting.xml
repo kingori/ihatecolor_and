@@ -3,11 +3,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               style="@style/view_mm"
-              android:background="@drawable/bg_common"
               android:gravity="center">
 
-    <ProgressBar
-            android:indeterminate="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+    <LinearLayout
+            style="@style/view_ww"
+            android:orientation="vertical"
+            android:gravity="top|center_horizontal">
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                style="@style/view_ww"
+                android:text="I HATE\nLOADING"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"/>
+
+        <ProgressBar
+                android:indeterminate="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                 android:layout_marginTop="20dp"/>
+    </LinearLayout>
 </LinearLayout>

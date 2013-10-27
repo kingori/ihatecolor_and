@@ -29,19 +29,21 @@
                 android:layout_gravity="center_vertical|right"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 >
 
             <ImageView
                     style="@style/view_ww"
-                    android:src="@drawable/appicon"/>
+                    android:src="@drawable/selector_life"/>
 
             <ImageView
                     style="@style/view_ww"
-                    android:src="@drawable/appicon"/>
+                    android:src="@drawable/selector_life"/>
 
             <ImageView
                     style="@style/view_ww"
-                    android:src="@drawable/appicon"/>
+                    android:src="@drawable/selector_life"/>
         </LinearLayout>
 
         <RelativeLayout

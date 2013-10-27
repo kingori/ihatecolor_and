@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              style="@style/view_mw"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
+              android:paddingTop="25dp"
+              android:paddingBottom="10dp"
+              android:gravity="top|center_horizontal">
+
+    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+            android:id="@+id/tv_msg"
+            style="@style/view_ww"
+            android:minWidth="260dp"
+            android:textColor="@color/main"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"/>
+
+    <LinearLayout
+            style="@style/view_mw"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_decline"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/select_red"
+                android:textColor="@android:color/white"
+                android:text="DECLINE"
+                android:minWidth="130dp"
+                />
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_accept"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/select_green"
+                android:textColor="@android:color/white"
+                android:text="ACCEPT"
+                android:minWidth="130dp"
+                />
+    </LinearLayout>
+</LinearLayout>
