@@ -1,14 +1,10 @@
 package kr.pe.kingori.ihatecolor.ui.fragment;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -17,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import kr.pe.kingori.ihatecolor.R;
 import kr.pe.kingori.ihatecolor.model.Color;
@@ -27,11 +24,6 @@ import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
 import kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -60,8 +52,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private GameState state = GameState.COUNTDOWN;
     private int bgmPausePosition = -1;
-
-    private int countDownCount = 3;
 
     private int curPosition = 0;
     private int curLives = MAX_LIFE;
@@ -139,8 +129,10 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 Participant participant = getBaseActivity().getPeerInfo();
                 if (participant != null) {
                     ((TextView) view.findViewById(R.id.tv_other)).setText("VS\n" + participant.getDisplayName());
-                    loadUserImage(view, participant);
+                    loadUserImage((ImageView) view.findViewById(R.id.iv_other), participant);
                 }
+            } else {
+                view.findViewById(R.id.vg_other).setVisibility(View.GONE);
             }
         }
         view.findViewById(R.id.bt_red).setOnClickListener(this);
@@ -158,40 +150,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         return view;
     }
 
-    private void loadUserImage(final View view, Participant participant) {
+    private void loadUserImage(ImageView view, Participant participant) {
         if (participant.getIconImageUri() != null) {
-            new AsyncTask<Uri, Void, Bitmap>() {
-                @Override
-                protected Bitmap doInBackground(Uri... params) {
-                    HttpURLConnection conn = null;
-                    InputStream is = null;
-                    try {
-                        conn = (HttpURLConnection) new URL(params[0].toString()).openConnection();
-                        is = new BufferedInputStream(conn.getInputStream());
-                        return BitmapFactory.decodeStream(is);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return null;
-                    } finally {
-                        if (is != null) {
-                            try {
-                                is.close();
-                            } catch (IOException e) {
-                            }
-                        }
-                        if (conn != null) {
-                            conn.disconnect();
-                        }
-                    }
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap bitmap) {
-                    if (bitmap != null) {
-                        ((ImageView) view.findViewById(R.id.iv_other)).setImageBitmap(bitmap);
-                    }
-                }
-            }.execute(participant.getIconImageUri());
+            ImageManager.create(getActivity()).loadImage(view, participant.getIconImageUri());
         }
     }
 
@@ -211,8 +172,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private void countdown(final int count) {
         if (!isAdded() || getBaseActivity() == null || fragmentPaused) return;
         tvCountdown.setVisibility(View.VISIBLE);
-
-        countDownCount = count;
 
         if (count < 0) {
             countdownR = null;
@@ -244,14 +203,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         tvCountdown.setText(countText);
         tvCountdown.setTextColor(getResources().getColor(countColorResId));
 
-        if (countdownR == null) {
-            countdownR = new Runnable() {
-                @Override
-                public void run() {
-                    countdown(countDownCount - 1);
-                }
-            };
-        }
+        countdownR = new Runnable() {
+            @Override
+            public void run() {
+                countdown(count - 1);
+            }
+        };
 
         tvCountdown.postDelayed(countdownR, 500L);
     }

@@ -24,3 +24,8 @@
 }
 
 -keep class kr.pe.kingori.ihatecolor.ui.event.** { *; }
+
+-dontwarn com.google.vending.**
+-dontwarn com.google.android.**
+-dontwarn com.android.vending.**
+-keepattributes LineNumerTable

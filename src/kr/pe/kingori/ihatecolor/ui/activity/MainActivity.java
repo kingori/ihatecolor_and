@@ -490,10 +490,13 @@ public class MainActivity extends BaseGameActivity implements
 
     public Participant getPeerInfo() {
         if (mParticipants != null) {
-            return mParticipants.get(0);
-        } else {
-            return null;
+            for (Participant participant : mParticipants) {
+                if (!participant.getParticipantId().equals(mMyId)) {
+                    return participant;
+                }
+            }
         }
+        return null;
     }
 
     @Override
