@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
+import com.bugsense.trace.BugSenseHandler;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Invitation;
@@ -75,6 +76,8 @@ public class MainActivity extends BaseGameActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         enableDebugLog(ENABLE_DEBUG, TAG);
+
+        BugSenseHandler.initAndStartSession(MainActivity.this, "9c65e78b");
 
         super.onCreate(savedInstanceState);
 
