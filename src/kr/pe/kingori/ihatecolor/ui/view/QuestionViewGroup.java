@@ -91,7 +91,7 @@ public class QuestionViewGroup extends RelativeLayout {
         int marginTop = (rowHeight + spaceBetweenRows) * currentRow;
         for (Question question : questionsInRow) {
             CustomFontTextView tv = new CustomFontTextView(getContext());
-            tv.setText(question.text.name());
+            tv.setText(question.text.nameResId);
             tv.setTextColor(getResources().getColor(question.answer.colorResId));
             tv.setGravity(Gravity.CENTER);
             tv.setIncludeFontPadding(false);

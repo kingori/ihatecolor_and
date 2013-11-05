@@ -11,19 +11,19 @@
             android:orientation="horizontal"
             >
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_red"
-                android:text="RED"
+                android:text="@string/red"
                 style="@style/answer_btn.type1.small"/>
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_green"
-                android:text="GREEN"
+                android:text="@string/green"
                 style="@style/answer_btn.type2.small"/>
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_blue"
-                android:text="BLUE"
+                android:text="@string/blue"
                 style="@style/answer_btn.type1.small"/>
 
     </LinearLayout>
@@ -34,19 +34,19 @@
             android:orientation="horizontal"
             >
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_yellow"
-                android:text="YELLOW"
+                android:text="@string/yellow"
                 style="@style/answer_btn.type2.small"/>
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_orange"
-                android:text="ORANGE"
+                android:text="@string/orange"
                 style="@style/answer_btn.type1.small"/>
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 android:id="@+id/bt_black"
-                android:text="BLACK"
+                android:text="@string/black"
                 style="@style/answer_btn.type2.small"/>
 
     </LinearLayout>

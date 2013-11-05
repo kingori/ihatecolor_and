@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.widget.TextView;
+import kr.pe.kingori.ihatecolor.R;
 
 public class FontManager {
     private static Typeface customTypeFace;
@@ -12,7 +13,7 @@ public class FontManager {
     }
 
     public static void init(Context context) {
-        customTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/intro.otf");
+        customTypeFace = Typeface.createFromAsset(context.getAssets(), context.getString(R.string.typeface_path));
     }
 
     public static TextView applyTypeface(TextView view) {

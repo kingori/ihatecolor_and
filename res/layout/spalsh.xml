@@ -10,7 +10,7 @@
 
         <include layout="@layout/incl_logo"/>
 
-        <TextView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 style="@style/view_ww"
                 android:text="TOO MUCH COLOR\nWILL KILL YOU"
                 android:layout_gravity="center"

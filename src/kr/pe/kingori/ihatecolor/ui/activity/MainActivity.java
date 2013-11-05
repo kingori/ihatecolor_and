@@ -352,7 +352,8 @@ public class MainActivity extends BaseGameActivity implements
         }
         if (showInvitationPopup) {
             CustomDialogFragment
-                    .newInstance(DialogEvent.DialogType.INVITATION, true, "YOU'RE INVITED BY " + inviter.getDisplayName() + ".\nWILL YOU ACCEPT THIS INVITATION?", "ACCEPT", "DENY")
+                    .newInstance(DialogEvent.DialogType.INVITATION, true,
+                            getString(R.string.invitation, inviter.getDisplayName() ), getString(R.string.accept), getString(R.string.deny))
                     .show(getSupportFragmentManager(), "dialog");
         }
     }

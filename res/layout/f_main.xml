@@ -34,7 +34,7 @@
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 style="@style/view_ww"
-                android:text="SINGLE PLAY"
+                android:text="@string/single_play"
                 android:textColor="@color/disable"
                 android:textSize="16sp"
                 android:layout_marginBottom="6dp"
@@ -50,7 +50,7 @@
                     android:id="@+id/bt_single_4"
                     style="@style/main_btn"
                     android:textColor="@color/blue"
-                    android:text="4 COLOR"
+                    android:text="@string/four_color"
                     android:layout_marginRight="6dp"
                     />
 
@@ -58,14 +58,14 @@
                     android:id="@+id/bt_single_6"
                     style="@style/main_btn"
                     android:textColor="@color/red"
-                    android:text="6 COLOR"
+                    android:text="@string/six_color"
                     android:layout_marginLeft="6dp"
                     />
         </LinearLayout>
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 style="@style/view_ww"
-                android:text="VS PLAY"
+                android:text="@string/vs_players"
                 android:textColor="@color/disable"
                 android:textSize="16sp"
                 android:layout_marginBottom="6dp"
@@ -82,7 +82,7 @@
                     style="@style/main_btn"
                     android:textColor="@color/green"
                     android:layout_marginRight="6dp"
-                    android:text="RANDOM"
+                    android:text="@string/random"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
@@ -90,14 +90,14 @@
                     style="@style/main_btn"
                     android:textColor="@color/yellow"
                     android:layout_marginLeft="6dp"
-                    android:text="FRIENDS"
+                    android:text="@string/friends"
                     />
         </LinearLayout>
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                 android:id="@+id/bt_achievement"
                 style="@style/main_btn.small"
-                android:text="ACHIEVEMENT"
+                android:text="@string/achievement"
                 android:layout_height="30dp"
                 android:layout_marginBottom="6dp"
                 />
@@ -105,27 +105,25 @@
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                 android:id="@+id/bt_leaderboard"
                 style="@style/main_btn.small"
-                android:text="LEADERBOARD"
+                android:text="@string/leaderboard"
                 android:layout_height="30dp"
                 android:layout_marginBottom="6dp"
                 />
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                 android:id="@+id/bt_sign_out"
-                android:text="SIGN OUT"
+                android:text="@string/sign_out"
                 android:layout_height="30dp"
                 style="@style/main_btn.small"
+                android:layout_marginBottom="12dp"
+                />
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                android:id="@+id/bt_about_us"
+                style="@style/main_btn.small"
+                android:text="@string/about_us"
+                android:layout_height="30dp"
                 />
     </LinearLayout>
 
-
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-            android:id="@+id/bt_about_us"
-            style="@style/main_btn.small"
-            android:text="WHO MADE THIS?"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/orange"
-            android:visibility="gone"
-            />
 </RelativeLayout>

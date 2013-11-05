@@ -1,5 +1,6 @@
 package kr.pe.kingori.ihatecolor.ui.fragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,6 +107,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void showAboutUs() {
+        Dialog aboutUsDialog = new Dialog(getActivity(), android.R.style.Theme_Holo_NoActionBar);
+        aboutUsDialog.setContentView(R.layout.diag_about_us);
+        aboutUsDialog.show();
 
     }
 
@@ -118,4 +122,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
             showButtons();
         }
     }
+
+
 }

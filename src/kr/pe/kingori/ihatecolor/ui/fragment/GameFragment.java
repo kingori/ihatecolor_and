@@ -1,5 +1,6 @@
 package kr.pe.kingori.ihatecolor.ui.fragment;
 
+import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.AudioManager;
@@ -7,6 +8,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private AnimationDrawable baseBg;
     private TextView tvTimer;
     private CountDownTimer timer;
+    private Vibrator vibe;
 
     private int soundLifeDecrease;
 
@@ -160,6 +163,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     public void onResume() {
         fragmentPaused = false;
         super.onResume();
+        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+
         if (state == GameState.COUNTDOWN) {
             countdown(3);
         } else if (state == GameState.PAUSE) {
@@ -339,6 +344,8 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     private void decreaseLives() {
         curLives--;
         sfxPlayer.play(soundLifeDecrease, 1, 1, 0, 0, 1);
+        vibe.vibrate(300);
+
         if (curLives >= 0) {
             vgLives.getChildAt(2 - curLives).setEnabled(false);
         }
@@ -392,12 +399,12 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
         if (gameCleared) {
             if (gameMode == GameMode.MULTI) {
-                msg = "YOU WIN!\nCLEAR TIME: " + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
+                msg = getString(R.string.you_win) + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
             } else {
-                msg = "CLEAR!\nCLEAR TIME: " + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
+                msg = getString(R.string.clear) + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
             }
         } else {
-            msg = "ARRGH...\nFAILED!";
+            msg = getString(R.string.failed);
         }
 
         CustomDialogFragment.newInstance(DialogEvent.DialogType.GAMEOVER, false, msg, "OK", null).show(getFragmentManager(), "diag");
@@ -523,7 +530,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
     private void showPauseDialog() {
         if (getFragmentManager().findFragmentByTag("diag") == null) {
-            CustomDialogFragment.newInstance(DialogEvent.DialogType.PAUSE, true, "PAUSED", "RESUME", "QUIT").show(getFragmentManager(), "diag");
+            CustomDialogFragment.newInstance(DialogEvent.DialogType.PAUSE, true, getString(R.string.paused), getString(R.string.resume), getString(R.string.quit)).show(getFragmentManager(), "diag");
         }
     }
 

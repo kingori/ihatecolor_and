@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">I HATE COLOR</string>
+    <string name="typeface_path">fonts/intro.otf</string>
+    <string name="single_play">SINGLE PLAY</string>
+    <string name="four_color">4 COLOR</string>
+    <string name="six_color">6 COLOR</string>
+    <string name="vs_players">VS PLAYERS</string>
+    <string name="random">RANDOM</string>
+    <string name="friends">FRIENDS</string>
+    <string name="achievement">ACHIEVEMENT</string>
+    <string name="leaderboard">LEADERBOARD</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="about_us">ABOUT US</string>
+    <string name="developer">DEVELOPER</string>
+    <string name="hanyungchung">HA NYUNG CHUNG</string>
+    <string name="aka_josh">A.K.A. JOSH</string>
+    <string name="sewonann">SEWON ANN</string>
+    <string name="aka_kingori">A.K.A. KINGORI</string>
+    <string name="designer">DESIGNER</string>
+    <string name="kyungjaeha">KYUNGJAE HA</string>
+    <string name="aka_ben">A.K.A. BEN</string>
+    <string name="red">RED</string>
+    <string name="green">GREEN</string>
+    <string name="blue">BLUE</string>
+    <string name="yellow">YELLOW</string>
+    <string name="orange">ORANGE</string>
+    <string name="black">BLACK</string>
+    <string name="paused">PAUSED</string>
+    <string name="resume">RESUME</string>
+    <string name="quit">QUIT</string>
+    <string name="invitation">YOU\'RE INVITED BY %1$s.\nWILL YOU ACCEPT THIS INVITATION?</string>
+    <string name="accept">ACCEPT</string>
+    <string name="deny">DENY</string>
+    <string name="you_win">YOU WIN!\nCLEAR TIME:</string>
+    <string name="clear">CLEAR!\nCLEAR TIME:</string>
+    <string name="failed">ARRGH...\nFAILED!</string>
 </resources>
