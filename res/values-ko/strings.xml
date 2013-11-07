@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="typeface_path">fonts/bm_hanna.otf</string>
+    <string name="typeface_path">fonts/nanum_gothic_bold.otf</string>
     <string name="single_play">싱글 플레이</string>
     <string name="four_color">4 색</string>
     <string name="six_color">6 색</string>
@@ -13,7 +13,7 @@
     <string name="about_us">만든이</string>
     <string name="developer">개발자</string>
     <string name="hanyungchung">정하녕</string>
-    <string name="aka_josh">JOSH</string>
+    <string name="aka_josh">MINORBLEND</string>
     <string name="sewonann">안세원</string>
     <string name="aka_kingori">KINGORI</string>
     <string name="designer">디자이너</string>

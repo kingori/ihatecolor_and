@@ -9,6 +9,7 @@
     <color name="bg">#e8fafa</color>
     <color name="main">#0e475f</color>
     <color name="disable">#b9c8ce</color>
+    <color name="current_question_bg">#d9e7ed</color>
     <color name="btn_1">#1c6585</color>
     <color name="btn_2">#307591</color>
     <color name="btn_pressed">#0a3a50</color>
