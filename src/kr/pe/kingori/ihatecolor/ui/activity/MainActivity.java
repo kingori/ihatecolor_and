@@ -1,11 +1,14 @@
 package kr.pe.kingori.ihatecolor.ui.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.bugsense.trace.BugSenseHandler;
@@ -222,6 +225,36 @@ public class MainActivity extends BaseGameActivity implements
         }
     }
 
+    public void showAboutUs() {
+        Dialog aboutUsDialog = new Dialog(this, android.R.style.Theme_Holo_NoActionBar);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uriString = "https://plus.google.com/";
+                switch (v.getId()) {
+                    case R.id.vg_josh:
+                        uriString += "+JoshHaNyungChung";
+                        break;
+                    case R.id.vg_kingori:
+                        uriString += "+SewonAnn";
+                        break;
+                    case R.id.vg_ben:
+                        uriString += "+KyungjaeHa";
+                        break;
+                }
+
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
+            }
+        };
+        aboutUsDialog.setContentView(R.layout.diag_about_us);
+        aboutUsDialog.findViewById(R.id.vg_josh).setOnClickListener(listener);
+        aboutUsDialog.findViewById(R.id.vg_kingori).setOnClickListener(listener);
+        aboutUsDialog.findViewById(R.id.vg_ben).setOnClickListener(listener);
+        aboutUsDialog.show();
+
+    }
+
     private static enum Screen {
         MAIN, WAITING, ERROR, GAME
     }
@@ -353,7 +386,7 @@ public class MainActivity extends BaseGameActivity implements
         if (showInvitationPopup) {
             CustomDialogFragment
                     .newInstance(DialogEvent.DialogType.INVITATION, true,
-                            getString(R.string.invitation, inviter.getDisplayName() ), getString(R.string.accept), getString(R.string.deny))
+                            getString(R.string.invitation, inviter.getDisplayName()), getString(R.string.accept), getString(R.string.deny))
                     .show(getSupportFragmentManager(), "dialog");
         }
     }
