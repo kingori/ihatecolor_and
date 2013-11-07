@@ -60,7 +60,8 @@ public class QuestionViewGroup extends RelativeLayout {
         FontManager.applyTypeface(tp);
         tp.setTextSize(getResources().getDimension(R.dimen.question_text_size));
         for (int i = 0; i < colors.length; i++) {
-            colorTextWidth[i] = (int) (tp.measureText(colors[i].name()) * 1.1 + 0.5) + getResources().getDimensionPixelSize(R.dimen.question_padding);
+            colorTextWidth[i] = (int) (tp.measureText(getContext().getResources().getString(colors[i].nameResId)) * 1.1 + 0.5)
+                    + getResources().getDimensionPixelSize(R.dimen.question_padding);
         }
 
         int currentRow = 0;
@@ -113,7 +114,7 @@ public class QuestionViewGroup extends RelativeLayout {
     }
 
     private void updateQestionColor() {
-        int color = getResources().getColor(R.color.disable);
+        int color = getResources().getColor(R.color.current_question_bg);
 
         for (int i = 0; i < currentPosition; i++) {
             TextView target = (TextView) getChildAt(i);
