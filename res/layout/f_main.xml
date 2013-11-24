@@ -40,7 +40,7 @@
                     style="@style/view_ww"
                     android:text="@string/single_play"
                     android:textColor="@color/disable"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/main_btn_textsize"
                     android:layout_marginBottom="6dp"
                     />
 
@@ -71,7 +71,7 @@
                     style="@style/view_ww"
                     android:text="@string/vs_players"
                     android:textColor="@color/disable"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/main_btn_textsize"
                     android:layout_marginBottom="6dp"
                     />
 
@@ -100,33 +100,29 @@
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_achievement"
-                    style="@style/main_btn.small"
                     android:text="@string/achievement"
-                    android:layout_height="30dp"
+                    style="@style/main_btn_small"
                     android:layout_marginBottom="6dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_leaderboard"
-                    style="@style/main_btn.small"
+                    style="@style/main_btn_small"
                     android:text="@string/leaderboard"
-                    android:layout_height="30dp"
                     android:layout_marginBottom="6dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_sign_out"
                     android:text="@string/sign_out"
-                    android:layout_height="30dp"
-                    style="@style/main_btn.small"
+                    style="@style/main_btn_small"
                     android:layout_marginBottom="12dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_about_us"
-                    style="@style/main_btn.small"
+                    style="@style/main_btn_small"
                     android:text="@string/about_us"
-                    android:layout_height="30dp"
                     />
         </LinearLayout>
     </RelativeLayout>

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="view_ww">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="view_mw">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="view_mm">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -21,6 +24,7 @@
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
     <style name="answer_btn.type1">
         <item name="android:background">@drawable/bg_btn_1</item>
     </style>
@@ -39,16 +43,15 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-
     <style name="main_btn" parent="@style/view_ww">
         <item name="android:background">@null</item>
-        <item name="android:textSize">26sp</item>
-
+        <item name="android:textSize">@dimen/main_btn_textsize</item>
     </style>
 
-    <style name="main_btn.small">
-        <item name="android:textSize">16sp</item>
+    <style name="main_btn_small" parent="@style/main_btn">
+        <item name="android:textSize">@dimen/main_btn_textsize_small</item>
         <item name="android:textColor">@color/main</item>
+        <item name="android:layout_height">30dp</item>
     </style>
 
     <style name="content" parent="@style/view_mm">
