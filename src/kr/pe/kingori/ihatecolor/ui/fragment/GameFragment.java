@@ -98,16 +98,19 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         soundLifeDecrease = sfxPlayer.load(getActivity(), R.raw.button_33, 1);
         int soundResId = 0;
         {
-            int soundRnd = new Random().nextInt(3);
+            int soundRnd = new Random().nextInt(4);
             switch (soundRnd) {
+                case 3:
+                    soundResId = R.raw.carmen;
+                    break;
                 case 2:
-                    soundResId = R.raw.fall_road;
+                    soundResId = R.raw.messiah;
                     break;
                 case 1:
-                    soundResId = R.raw.umbrella;
+                    soundResId = R.raw.tidal_wave;
                     break;
                 case 0:
-                    soundResId = R.raw.four_seasons;
+                    soundResId = R.raw.walking_the_dog;
                     break;
             }
         }
@@ -399,9 +402,9 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
 
         if (gameCleared) {
             if (gameMode == GameMode.MULTI) {
-                msg = getString(R.string.you_win) + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
+                msg = getString(R.string.you_win) + String.format("%.2f", elapsedTimeInMillis / 1000f);
             } else {
-                msg = getString(R.string.clear) + String.format("%.2f", (float) (elapsedTimeInMillis / 1000));
+                msg = getString(R.string.clear) + String.format("%.2f", elapsedTimeInMillis / 1000f);
             }
         } else {
             msg = getString(R.string.failed);
