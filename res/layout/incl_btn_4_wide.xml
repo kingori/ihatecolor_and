@@ -12,13 +12,11 @@
             >
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                android:id="@+id/bt_red"
-                android:text="@string/red"
+                android:id="@+id/bt_1"
                 style="@style/answer_btn.type1"/>
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                android:id="@+id/bt_green"
-                android:text="@string/green"
+                android:id="@+id/bt_2"
                 style="@style/answer_btn.type2"/>
     </LinearLayout>
 
@@ -29,14 +27,12 @@
             >
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                android:id="@+id/bt_blue"
-                android:text="@string/blue"
+                android:id="@+id/bt_3"
                 style="@style/answer_btn.type2"/>
 
 
         <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                android:id="@+id/bt_yellow"
-                android:text="@string/yellow"
+                android:id="@+id/bt_4"
                 style="@style/answer_btn.type1"/>
     </LinearLayout>
 

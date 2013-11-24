@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.gms.common.images.ImageManager;
@@ -24,10 +25,10 @@ import kr.pe.kingori.ihatecolor.ui.Constants;
 import kr.pe.kingori.ihatecolor.ui.CustomDialogFragment;
 import kr.pe.kingori.ihatecolor.ui.event.DialogEvent;
 import kr.pe.kingori.ihatecolor.ui.event.GameEvent;
+import kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView;
 import kr.pe.kingori.ihatecolor.ui.view.QuestionViewGroup;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
 
@@ -129,8 +130,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             ((ViewStub) view.findViewById(R.id.vs_btn_4)).inflate();
         } else {
             ((ViewStub) view.findViewById(R.id.vs_btn_6)).inflate();
-            view.findViewById(R.id.bt_black).setOnClickListener(this);
-            view.findViewById(R.id.bt_orange).setOnClickListener(this);
             if (gameMode == GameMode.MULTI) {
                 Participant participant = getBaseActivity().getPeerInfo();
                 if (participant != null) {
@@ -141,10 +140,21 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 view.findViewById(R.id.vg_other).setVisibility(View.GONE);
             }
         }
-        view.findViewById(R.id.bt_red).setOnClickListener(this);
-        view.findViewById(R.id.bt_blue).setOnClickListener(this);
-        view.findViewById(R.id.bt_green).setOnClickListener(this);
-        view.findViewById(R.id.bt_yellow).setOnClickListener(this);
+
+        int[] btnIds = new int[]{R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6};
+
+        int colorCount = (gameMode == GameMode.SINGLE_4 ? 4 : 6);
+
+        List<Color> colors = Arrays.asList(Color.values()).subList(0, colorCount);
+        Collections.shuffle(colors);
+
+        for (int i = 0; i < colorCount; i++) {
+            CustomFontTextView btnView = (CustomFontTextView) view.findViewById(btnIds[i]);
+            Color color =  colors.get(i);
+            btnView.setOnClickListener(this);
+            btnView.setText(color.nameResId);
+            btnView.setTag(color);
+        }
 
         LayerDrawable layerDrawable = (LayerDrawable) view.getBackground();
         baseBg = (AnimationDrawable) layerDrawable.findDrawableByLayerId(R.id.bg_base);
@@ -441,23 +451,13 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         Color answer = null;
 
         switch (v.getId()) {
-            case R.id.bt_red:
-                answer = Color.RED;
-                break;
-            case R.id.bt_blue:
-                answer = Color.BLUE;
-                break;
-            case R.id.bt_green:
-                answer = Color.GREEN;
-                break;
-            case R.id.bt_yellow:
-                answer = Color.YELLOW;
-                break;
-            case R.id.bt_orange:
-                answer = Color.ORANGE;
-                break;
-            case R.id.bt_black:
-                answer = Color.BLACK;
+            case R.id.bt_1:
+            case R.id.bt_2:
+            case R.id.bt_3:
+            case R.id.bt_4:
+            case R.id.bt_5:
+            case R.id.bt_6:
+                answer = (Color) v.getTag();
                 break;
         }
         if (isRightAnswer(answer)) {
