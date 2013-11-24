@@ -1,129 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                style="@style/content"
-                android:orientation="vertical"
-        >
-
-    <LinearLayout
-            android:id="@+id/vg_logo"
-            style="@style/view_ww"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
-
-        <include
-                layout="@layout/incl_logo"
-                />
-        <!-- sign-in button -->
-        <com.google.android.gms.common.SignInButton
-                android:id="@+id/bt_signin"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                />
-    </LinearLayout>
-
-    <LinearLayout
-            android:id="@+id/vg_game_btns"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             style="@style/view_mm"
-            android:layout_below="@+id/vg_logo"
+            android:fillViewport="true">
+
+    <RelativeLayout
+            style="@style/content"
             android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            android:gravity="top|center_horizontal">
-
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                style="@style/view_ww"
-                android:text="@string/single_play"
-                android:textColor="@color/disable"
-                android:textSize="16sp"
-                android:layout_marginBottom="6dp"
-                />
+            >
 
         <LinearLayout
+                android:id="@+id/vg_logo"
                 style="@style/view_ww"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                >
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                    android:id="@+id/bt_single_4"
-                    style="@style/main_btn"
-                    android:textColor="@color/blue"
-                    android:text="@string/four_color"
-                    android:layout_marginRight="6dp"
+            <include
+                    layout="@layout/incl_logo"
                     />
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                    android:id="@+id/bt_single_6"
-                    style="@style/main_btn"
-                    android:textColor="@color/red"
-                    android:text="@string/six_color"
-                    android:layout_marginLeft="6dp"
+            <!-- sign-in button -->
+            <com.google.android.gms.common.SignInButton
+                    android:id="@+id/bt_signin"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     />
         </LinearLayout>
 
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                style="@style/view_ww"
-                android:text="@string/vs_players"
-                android:textColor="@color/disable"
-                android:textSize="16sp"
-                android:layout_marginBottom="6dp"
-                />
-
         <LinearLayout
-                style="@style/view_ww"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                >
+                android:id="@+id/vg_game_btns"
+                style="@style/view_mm"
+                android:layout_below="@+id/vg_logo"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:gravity="top|center_horizontal">
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                    style="@style/view_ww"
+                    android:text="@string/single_play"
+                    android:textColor="@color/disable"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    />
+
+            <LinearLayout
+                    style="@style/view_ww"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp"
+                    >
+
+                <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                        android:id="@+id/bt_single_4"
+                        style="@style/main_btn"
+                        android:textColor="@color/blue"
+                        android:text="@string/four_color"
+                        android:layout_marginRight="6dp"
+                        />
+
+                <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                        android:id="@+id/bt_single_6"
+                        style="@style/main_btn"
+                        android:textColor="@color/red"
+                        android:text="@string/six_color"
+                        android:layout_marginLeft="6dp"
+                        />
+            </LinearLayout>
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                    style="@style/view_ww"
+                    android:text="@string/vs_players"
+                    android:textColor="@color/disable"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    />
+
+            <LinearLayout
+                    style="@style/view_ww"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    >
+
+                <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                        android:id="@+id/bt_quick"
+                        style="@style/main_btn"
+                        android:textColor="@color/green"
+                        android:layout_marginRight="6dp"
+                        android:text="@string/random"
+                        />
+
+                <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                        android:id="@+id/bt_multi"
+                        style="@style/main_btn"
+                        android:textColor="@color/yellow"
+                        android:layout_marginLeft="6dp"
+                        android:text="@string/friends"
+                        />
+            </LinearLayout>
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                    android:id="@+id/bt_quick"
-                    style="@style/main_btn"
-                    android:textColor="@color/green"
-                    android:layout_marginRight="6dp"
-                    android:text="@string/random"
+                    android:id="@+id/bt_achievement"
+                    style="@style/main_btn.small"
+                    android:text="@string/achievement"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="6dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                    android:id="@+id/bt_multi"
-                    style="@style/main_btn"
-                    android:textColor="@color/yellow"
-                    android:layout_marginLeft="6dp"
-                    android:text="@string/friends"
+                    android:id="@+id/bt_leaderboard"
+                    style="@style/main_btn.small"
+                    android:text="@string/leaderboard"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="6dp"
+                    />
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                    android:id="@+id/bt_sign_out"
+                    android:text="@string/sign_out"
+                    android:layout_height="30dp"
+                    style="@style/main_btn.small"
+                    android:layout_marginBottom="12dp"
+                    />
+
+            <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
+                    android:id="@+id/bt_about_us"
+                    style="@style/main_btn.small"
+                    android:text="@string/about_us"
+                    android:layout_height="30dp"
                     />
         </LinearLayout>
-
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                android:id="@+id/bt_achievement"
-                style="@style/main_btn.small"
-                android:text="@string/achievement"
-                android:layout_height="30dp"
-                android:layout_marginBottom="6dp"
-                />
-
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                android:id="@+id/bt_leaderboard"
-                style="@style/main_btn.small"
-                android:text="@string/leaderboard"
-                android:layout_height="30dp"
-                android:layout_marginBottom="6dp"
-                />
-
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                android:id="@+id/bt_sign_out"
-                android:text="@string/sign_out"
-                android:layout_height="30dp"
-                style="@style/main_btn.small"
-                android:layout_marginBottom="12dp"
-                />
-
-        <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
-                android:id="@+id/bt_about_us"
-                style="@style/main_btn.small"
-                android:text="@string/about_us"
-                android:layout_height="30dp"
-                />
-    </LinearLayout>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

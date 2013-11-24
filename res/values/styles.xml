@@ -31,18 +31,18 @@
 
     <style name="answer_btn.type1.small">
         <item name="android:background">@drawable/bg_btn_1</item>
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="answer_btn.type2.small">
         <item name="android:background">@drawable/bg_btn_2</item>
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 
     <style name="main_btn" parent="@style/view_ww">
         <item name="android:background">@null</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">26sp</item>
 
     </style>
 
@@ -55,4 +55,6 @@
         <item name="android:background">@drawable/bg_common</item>
         <item name="android:padding">@dimen/content_padding</item>
     </style>
+
+
 </resources>

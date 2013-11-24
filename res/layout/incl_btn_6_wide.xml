@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="140dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            >
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_red"
+                android:text="@string/red"
+                style="@style/answer_btn.type1.small"/>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_green"
+                android:text="@string/green"
+                style="@style/answer_btn.type2.small"/>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_blue"
+                android:text="@string/blue"
+                style="@style/answer_btn.type1.small"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            >
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_yellow"
+                android:text="@string/yellow"
+                style="@style/answer_btn.type2.small"/>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_orange"
+                android:text="@string/orange"
+                style="@style/answer_btn.type1.small"/>
+
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                android:id="@+id/bt_black"
+                android:text="@string/black"
+                style="@style/answer_btn.type2.small"/>
+
+    </LinearLayout>
+
+</LinearLayout>

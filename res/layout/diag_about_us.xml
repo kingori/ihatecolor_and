@@ -1,133 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        style="@style/view_mm"
+        android:fillViewport="true"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              style="@style/view_mm"
-              android:background="@drawable/bg_common"
-              android:gravity="top|center_horizontal">
-
-    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-            style="@style/view_ww"
-            android:text="@string/about_us"
-            android:layout_marginTop="52dp"
-            android:textSize="30sp"
-            android:textColor="@color/main"
-            android:layout_marginBottom="30dp"
-            />
     <LinearLayout
-    style="@style/view_ww"
             android:orientation="vertical"
-            android:gravity="top|left">
-    <LinearLayout
-            android:id="@+id/vg_josh"
-            style="@style/view_ww"
-            android:orientation="horizontal"
+            style="@style/view_mm"
+            android:background="@drawable/bg_common"
+            android:gravity="top|center_horizontal">
 
-            android:gravity="left|center_vertical">
-
-        <ImageView
+        <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
                 style="@style/view_ww"
-                android:src="@drawable/photo_01"
+                android:text="@string/about_us"
+                android:layout_marginTop="38dp"
+                android:textSize="30sp"
+                android:textColor="@color/main"
+                android:layout_marginBottom="20dp"
                 />
 
         <LinearLayout
                 style="@style/view_ww"
                 android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                >
+                android:gravity="top|left">
 
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+            <LinearLayout
+                    android:id="@+id/vg_josh"
                     style="@style/view_ww"
-                    android:text="@string/developer"
-                    android:textColor="@color/blue"
-                    android:textSize="16sp"/>
+                    android:orientation="horizontal"
 
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/hanyungchung"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:gravity="left|center_vertical">
 
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                <ImageView
+                        style="@style/view_ww"
+                        android:src="@drawable/photo_01"
+                        />
+
+                <LinearLayout
+                        style="@style/view_ww"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        >
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/developer"
+                            android:textColor="@color/blue"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/hanyungchung"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/aka_josh"
+                            android:textColor="@color/disable"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/vg_kingori"
                     style="@style/view_ww"
-                    android:text="@string/aka_josh"
-                    android:textColor="@color/disable"
-                    android:textSize="16sp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left|center_vertical">
+
+                <ImageView
+                        style="@style/view_ww"
+                        android:src="@drawable/photo_02"
+                        />
+
+                <LinearLayout
+                        style="@style/view_ww"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        >
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/developer"
+                            android:textColor="@color/red"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/sewonann"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/aka_kingori"
+                            android:textColor="@color/disable"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/vg_ben"
+                    style="@style/view_ww"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left|center_vertical">
+
+                <ImageView
+                        style="@style/view_ww"
+                        android:src="@drawable/photo_03"
+                        />
+
+                <LinearLayout
+                        style="@style/view_ww"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        >
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/designer"
+                            android:textColor="@color/green"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/kyungjaeha"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+                    <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
+                            style="@style/view_ww"
+                            android:text="@string/aka_ben"
+                            android:textColor="@color/disable"
+                            android:textSize="16sp"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-            android:id="@+id/vg_kingori"
-            style="@style/view_ww"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:gravity="left|center_vertical">
-
-        <ImageView
-                style="@style/view_ww"
-                android:src="@drawable/photo_02"
-                />
-
-        <LinearLayout
-                style="@style/view_ww"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                >
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/developer"
-                    android:textColor="@color/red"
-                    android:textSize="16sp"/>
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/sewonann"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/aka_kingori"
-                    android:textColor="@color/disable"
-                    android:textSize="16sp"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-            android:id="@+id/vg_ben"
-            style="@style/view_ww"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:gravity="left|center_vertical">
-
-        <ImageView
-                style="@style/view_ww"
-                android:src="@drawable/photo_03"
-                />
-
-        <LinearLayout
-                style="@style/view_ww"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                >
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/designer"
-                    android:textColor="@color/green"
-                    android:textSize="16sp"/>
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/kyungjaeha"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-            <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
-                    style="@style/view_ww"
-                    android:text="@string/aka_ben"
-                    android:textColor="@color/disable"
-                    android:textSize="16sp"/>
-        </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>

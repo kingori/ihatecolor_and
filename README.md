@@ -13,7 +13,8 @@ I HATE COLOR is brain-teasing puzzle game based on [Stroop Effect](http://en.wik
    * Leaderboard
    * Achivement
    * Real-time Multiplayer
-   
+
 ### Dependencies
 
 * Google Play Service Library
+* [Greenrobot EventBus](https://github.com/greenrobot/EventBus)

@@ -6,6 +6,7 @@
     <LinearLayout
             style="@style/view_ww"
             android:orientation="vertical"
+            android:gravity="top|center_horizontal"
             android:layout_centerInParent="true">
 
         <include layout="@layout/incl_logo"/>
