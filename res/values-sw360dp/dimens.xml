@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="question_text_size">24sp</dimen>
+    <dimen name="question_text_size_wide">22sp</dimen>
+    <dimen name="question_height">28dp</dimen>
+</resources>

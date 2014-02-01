@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="main_btn_small" parent="@style/main_btn">
         <item name="android:textSize">@dimen/main_btn_textsize_small</item>
         <item name="android:textColor">@color/main</item>

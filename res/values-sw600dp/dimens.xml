@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="question_text_size">40sp</dimen>
-    <dimen name="question_height">45dp</dimen>
-    <dimen name="main_btn_textsize">40sp</dimen>
-    <dimen name="main_btn_textsize_small">36sp</dimen>
-</resources>

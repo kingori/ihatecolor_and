@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="typeface_path">fonts/nanum_gothic_bold.otf</string>
+    <string name="single_play">싱글 플레이</string>
+    <string name="four_color">4 색</string>
+    <string name="six_color">6 색</string>
+    <string name="vs_players">멀티 플레이</string>
+    <string name="random">무작위</string>
+    <string name="friends">친구랑</string>
+    <string name="achievement">업적</string>
+    <string name="leaderboard">리더보드</string>
+    <string name="sign_out">로그아웃</string>
+    <string name="about_us">만든이</string>
+    <string name="developer">개발자</string>
+    <string name="hanyungchung">정하녕</string>
+    <string name="aka_josh">MINORBLEND</string>
+    <string name="sewonann">안세원</string>
+    <string name="aka_kingori">KINGORI</string>
+    <string name="designer">디자이너</string>
+    <string name="kyungjaeha">하경제</string>
+    <string name="aka_ben">BEN</string>
+    <string name="red">빨강</string>
+    <string name="green">녹색</string>
+    <string name="blue">파랑</string>
+    <string name="yellow">노랑</string>
+    <string name="orange">오렌지</string>
+    <string name="black">검정</string>
+    <string name="paused">일시중지</string>
+    <string name="resume">계속</string>
+    <string name="quit">중단</string>
+    <string name="invitation">%1$s님이 결투를 신청했습니다.\n수락하시겠습니까?</string>
+    <string name="accept">수락</string>
+    <string name="deny">거절</string>
+    <string name="you_win">이겼다!\n걸린 시간:</string>
+    <string name="clear">깼다!\n걸린 시간:</string>
+    <string name="failed">아으으...\n실패!</string>
+</resources>

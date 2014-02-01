@@ -374,6 +374,11 @@ public class MainActivity extends BaseGameActivity implements
         setInvitationViewVisibility();
     }
 
+    @Override
+    public void onInvitationRemoved(String s) {
+
+    }
+
     private void setInvitationViewVisibility() {
         boolean showInvitationPopup = false;
         if (incomingInvitationId != null) {

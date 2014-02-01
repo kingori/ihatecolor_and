@@ -22,6 +22,6 @@ public class CustomFontButton extends Button {
     }
 
     private void applyTypeFace() {
-        FontManager.applyTypeface(this);
+       FontManager.applyTypeface(this);
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="question_text_size">24sp</dimen>
+    <dimen name="question_text_size">18sp</dimen>
     <dimen name="question_text_size_wide">16sp</dimen>
+    <dimen name="question_height">24dp</dimen>
     <dimen name="question_padding">5dp</dimen>
-    <dimen name="question_height">35dp</dimen>
-    <dimen name="logo_size">150dp</dimen>
-    <dimen name="main_btn_textsize">26sp</dimen>
+
+    <dimen name="logo_size">140dp</dimen>
+    <dimen name="main_btn_textsize">20sp</dimen>
     <dimen name="main_btn_textsize_small">16sp</dimen>
     <dimen name="main_logo_top_margin">16dp</dimen>
     <dimen name="bg_padding">12dp</dimen>

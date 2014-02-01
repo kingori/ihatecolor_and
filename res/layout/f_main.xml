@@ -33,7 +33,7 @@
                 style="@style/view_mm"
                 android:layout_below="@+id/vg_logo"
                 android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="22dp"
                 android:gravity="top|center_horizontal">
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontTextView
@@ -41,13 +41,13 @@
                     android:text="@string/single_play"
                     android:textColor="@color/disable"
                     android:textSize="@dimen/main_btn_textsize"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="2dp"
                     />
 
             <LinearLayout
                     style="@style/view_ww"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     >
 
                 <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
@@ -56,6 +56,7 @@
                         android:textColor="@color/blue"
                         android:text="@string/four_color"
                         android:layout_marginRight="6dp"
+                        android:layout_height="30dp"
                         />
 
                 <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
@@ -64,6 +65,7 @@
                         android:textColor="@color/red"
                         android:text="@string/six_color"
                         android:layout_marginLeft="6dp"
+                        android:layout_height="30dp"
                         />
             </LinearLayout>
 
@@ -72,13 +74,13 @@
                     android:text="@string/vs_players"
                     android:textColor="@color/disable"
                     android:textSize="@dimen/main_btn_textsize"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="2dp"
                     />
 
             <LinearLayout
                     style="@style/view_ww"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="8dp"
                     >
 
                 <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
@@ -87,6 +89,7 @@
                         android:textColor="@color/green"
                         android:layout_marginRight="6dp"
                         android:text="@string/random"
+                        android:layout_height="30dp"
                         />
 
                 <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
@@ -95,6 +98,7 @@
                         android:textColor="@color/yellow"
                         android:layout_marginLeft="6dp"
                         android:text="@string/friends"
+                        android:layout_height="30dp"
                         />
             </LinearLayout>
 
@@ -102,21 +106,21 @@
                     android:id="@+id/bt_achievement"
                     android:text="@string/achievement"
                     style="@style/main_btn_small"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="4dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_leaderboard"
                     style="@style/main_btn_small"
                     android:text="@string/leaderboard"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginBottom="4dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton
                     android:id="@+id/bt_sign_out"
                     android:text="@string/sign_out"
                     style="@style/main_btn_small"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="8dp"
                     />
 
             <kr.pe.kingori.ihatecolor.ui.view.CustomFontButton

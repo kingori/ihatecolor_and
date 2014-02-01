@@ -6,7 +6,6 @@
         android:padding="0dp">
 
     <RelativeLayout
-            android:orientation="vertical"
             style="@style/view_mm"
             android:padding="@dimen/bg_padding"
             >
@@ -49,8 +48,7 @@
         <RelativeLayout
                 style="@style/view_mm"
                 android:layout_marginTop="60dp"
-                android:layout_marginBottom="160dp"
-
+                android:layout_marginBottom="120dp"
                 >
 
             <LinearLayout
@@ -87,7 +85,7 @@
         <ViewStub
                 android:id="@+id/vs_btn_4"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="120dp"
                 android:layout="@layout/incl_btn_4"
                 android:layout_alignParentBottom="true"
                 />
@@ -95,7 +93,7 @@
         <ViewStub
                 android:id="@+id/vs_btn_6"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="120dp"
                 android:layout="@layout/incl_btn_6"
                 android:layout_alignParentBottom="true"
                 />

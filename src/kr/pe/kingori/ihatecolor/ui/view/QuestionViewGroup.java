@@ -50,6 +50,8 @@ public class QuestionViewGroup extends RelativeLayout {
         }
     }
 
+    private float textSize;
+
     private void layoutQuestion(ArrayList<Question> question, int measuredWidth) {
         removeAllViews();
 
@@ -59,7 +61,8 @@ public class QuestionViewGroup extends RelativeLayout {
         int[] colorTextWidth = new int[colors.length];
         TextPaint tp = new TextPaint(0);
         FontManager.applyTypeface(tp);
-        tp.setTextSize(getResources().getDimension(UiUtil.isWideDevice(getContext()) ? R.dimen.question_text_size_wide : R.dimen.question_text_size));
+        textSize = getResources().getDimension(UiUtil.isWideDevice(getContext()) ? R.dimen.question_text_size_wide : R.dimen.question_text_size);
+        tp.setTextSize(textSize);
         for (int i = 0; i < colors.length; i++) {
             colorTextWidth[i] = (int) (tp.measureText(getContext().getResources().getString(colors[i].nameResId)) * 1.1 + 0.5)
                     + getResources().getDimensionPixelSize(R.dimen.question_padding);
@@ -94,7 +97,7 @@ public class QuestionViewGroup extends RelativeLayout {
         int marginTop = (rowHeight + spaceBetweenRows) * currentRow;
 
 
-        int textSizeSp = UiUtil.isWideDevice(getContext()) ? 14 : 26;
+//        int textSizeSp = UiUtil.isWideDevice(getContext()) ? 14 : 26;
 
         for (Question question : questionsInRow) {
             CustomFontTextView tv = new CustomFontTextView(getContext());
@@ -102,7 +105,8 @@ public class QuestionViewGroup extends RelativeLayout {
             tv.setTextColor(getResources().getColor(question.answer.colorResId));
             tv.setGravity(Gravity.CENTER);
             tv.setIncludeFontPadding(false);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
             tv.setPadding(0, padding, 0, padding / 2);
 
             int width = colorTextWidth[question.text.ordinal()];
